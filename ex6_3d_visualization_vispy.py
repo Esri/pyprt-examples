@@ -29,7 +29,7 @@ CS_FOLDER = os.path.dirname(os.path.realpath(__file__))
 
 
 def asset_file(filename):
-    return os.path.join(os.path.dirname(CS_FOLDER), 'examples', 'data', filename)
+    return os.path.join(CS_FOLDER, 'data', filename)
 
 
 class Canvas(scene.SceneCanvas):
