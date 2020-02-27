@@ -14,3 +14,6 @@ PyGEL3D = "*"
 
 [pipenv]
 allow_prereleases = true
+
+[requires]
+python_version = "3.6"
