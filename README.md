@@ -111,7 +111,7 @@ To run the examples please follow these steps:
 		CornerWallWidth: 1</br>
 		WallTexture: "facade/walls/bricks.jpg"</br>
 		ColorizeWall: "#FCEFE2"</td>
-    <td>Allows generating a "candler" building model, which is textures, detailed and realistic.</td>
+    <td>Allows generating a "candler" building model, which is textured, detailed and realistic.</td>
   </tr>
   <tr>
     <td>envelope2002.rpk</td>
