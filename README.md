@@ -4,13 +4,20 @@ PyPRT is a Python binding for PRT (CityEngine Procedural Runtime). It enables th
 
 This repo contains examples of PyPRT usage. You can find the source code in the main [pyprt](https://github.com/Esri/pyprt) repository. More detailed information is available there.
 
-![Generated geometry exported as OBJ (ex7)](images/building.png) ![Generated parks and trees (ex8)](images/generated_trees.png)
+<p align="center">
+  <img src="images/building.png">
+</p>
+
+<p align="center">
+  <img src="images/generated_trees.png">
+</p>
 
 ## Table of Contents
 
 * [Installation](#installation)
 * [Examples](#examples)
 * [Running the examples](#running-the-examples)
+* [Ready-to-use Rule Packages](#ready-to-use-rule-packages)
 * [License](#license)
 
 
@@ -79,6 +86,69 @@ To run the examples please follow these steps:
 1. Change into the virtual python environment: `pipenv shell`
 1. Now run e.g. `python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `jupyter notebook` and open the desired example notebook in the opening browser page. 
 
+## Ready-to-use Rule Packages
+
+<table style="width:100%">
+  <tr>
+    <th>Rule Package</th>
+    <th>CGB Rule File</th> 
+    <th>Shape Attributes and Default Values</th>
+    <th>Brief Description</th>
+  </tr>
+  <tr>
+    <td>candler.rpk</td>
+    <td>bin/candler.cgb</td>
+    <td>BuildingHeight: 62</br>
+		Mode: Visualization"</br>
+		FloorHeight: 3.5</br>
+		GroundfloorHeight: 4.3</br>
+		TileWidth: 3.55</br>
+		CorniceOverhang: 1.2</br>
+		WindowHeight: 2.05</br>
+		FrontWindowWidth: 2.15</br>
+		RearWindowWidth: 1.2</br>
+		SillSize: 0.26</br>
+		CornerWallWidth: 1</br>
+		WallTexture: "facade/walls/bricks.jpg"</br>
+		ColorizeWall: "#FCEFE2"</td>
+    <td>Allows generating a "candler" building model, which is textures, detailed and realistic.</td>
+  </tr>
+  <tr>
+    <td>envelope2002.rpk</td>
+    <td>rules/typology/envelope2002.cgb</td>
+    <td>Density_bonus_height: 60</br>
+		shape_of_building: 1</br>
+		lot_coverage_parameter: 60</br>
+		height_first_tier: 12.2</br>
+		first_setback_size: 3</br>
+		height_second_tier: 40</br>
+		second_setback_size: 3</br>
+		ground_floors_use: "commercial"</br>
+		main_building_use: "residential"</br>
+		create_green_spaces: false</br>
+		report_but_not_display_green: false</br>
+		etc...
+	</td>
+    <td>Allows generating a realistic and detailed building.</td>
+  </tr>
+  <tr>
+    <td>extrusion_rule.rpk</td>
+    <td>bin/extrusion_rule.cgb</td>
+    <td>minBuildingHeight: 10</br>
+		maxBuildingHeight: 30</br>
+		buildingColor: "#FF00FF"</br>
+		OBJECTID: 0</br>
+		text: "salut"
+	</td>
+    <td>Performs a simple extrusion of the initial shape with a height equals to a random number between the min and maxBuildingHeight.</td>
+  </tr>
+  <tr>
+    <td>noRule.rpk</td>
+    <td>bin/noRule.cgb</td>
+    <td> </td>
+    <td>Performs the identity operation.</td>
+  </tr>
+</table>
 
 ## License
 
