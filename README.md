@@ -72,7 +72,7 @@ Simply run `pip install pyprt` in your desired Python environment or `conda inst
   <tr>
     <td>ex8_3d_gis_content_generation.ipynb</td>
     <td>This example demonstrates how PyPRT can be used with the <a href="https://developers.arcgis.com/python/">ArcGIS API for Python</a> in order to collect data from <a href="https://www.esri.com/en-us/arcgis/products/arcgis-online/overview">ArcGIS Online</a>, generate 3D content and publish the content back to ArcGIS Online.</td>
-    <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://www.esri.com/en-us/arcgis/products/create-account">ArcGIS Online account</a>. Also, the published item needs to be manually deleted from the ArcGIS online account before the example script can be run again (we do not want to delete things from your account).</td>
+    <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://developers.arcgis.com/">ArcGIS Developer account</a>. Also, the published item needs to be manually deleted from the ArcGIS Online account before the example script can be run again (we do not want to delete things from your account).</td>
   </tr>
 </table>
 
