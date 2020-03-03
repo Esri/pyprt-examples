@@ -17,7 +17,7 @@ This repo contains examples of PyPRT usage. You can find the source code in the 
 * [Installation](#installation)
 * [Examples](#examples)
 * [Running the examples](#running-the-examples)
-* [Ready-to-use Rule Packages](#ready-to-use-rule-packages)
+* [Provided Rule Packages](#provided-rule-packages)
 * [License](#license)
 
 
@@ -86,7 +86,7 @@ To run the examples please follow these steps:
 1. Change into the virtual python environment: `pipenv shell`
 1. Now run e.g. `python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `jupyter notebook` and open the desired example notebook in the opening browser page. 
 
-## Ready-to-use Rule Packages
+## Provided Rule Packages
 
 <table style="width:100%">
   <tr>
