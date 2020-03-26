@@ -21,22 +21,22 @@ AGO_DATA_DIR = 'modelVisServerData'
 
 class MainHandler(tornado.web.RequestHandler):
     def initialize(self, gis):
-        self.fname = ''
-        self.final_filename = ''
+        self.filename = ''
+        self.extension_filename = ''
         self.file_path = ''
-        self.final_filename_slpk = ''
+        self.filename_slpk = ''
         self.gis = gis
 
     def save_file(self):
-        file1 = self.request.files['file'][0]
-        original_fname = file1['filename']
-        extension = os.path.splitext(original_fname)[1]
-        self.fname = ''.join(random.choice(string.ascii_lowercase +
-                                           string.digits) for x in range(32))
-        self.final_filename = self.fname + extension
-        self.file_path = os.path.join(OUTPUT_PATH, self.final_filename)
+        uploaded_file = self.request.files['file'][0]
+        original_filename = uploaded_file['filename']
+        extension = os.path.splitext(original_filename)[1]
+        self.filename = os.path.splitext(original_filename)[0] + '_' + ''.join(random.choice(string.ascii_lowercase +
+                                                                                             string.digits) for x in range(5))
+        self.extension_filename = self.filename + extension
+        self.file_path = os.path.join(OUTPUT_PATH, self.extension_filename)
         output_file = open(self.file_path, 'wb')
-        output_file.write(file1['body'])
+        output_file.write(uploaded_file['body'])
 
     def convert_to_slpk(self):
         x_coord = self.get_argument("x_coordinate")
@@ -47,13 +47,14 @@ class MainHandler(tornado.web.RequestHandler):
         print(f'Elevation in meters: {elev}')
 
         # Model Generator Instance
-        m = pyprt.ModelGenerator([pyprt.InitialShape(self.file_path)])
+        mod_generator1 = pyprt.ModelGenerator(
+            [pyprt.InitialShape(self.file_path)])
 
         shape_attributes = {'ruleFile': 'bin/translateModel.cgb',
                             'startRule': 'Default$Lot'}
 
-        model = m.generate_model([shape_attributes], RPK,
-                                 'com.esri.pyprt.PyEncoder', {'emitReport': False})
+        model = mod_generator1.generate_model([shape_attributes], RPK,
+                                              'com.esri.pyprt.PyEncoder', {'emitReport': False})
 
         # Bounding box
         mod_vertices = model[0].get_vertices()
@@ -76,13 +77,13 @@ class MainHandler(tornado.web.RequestHandler):
         shifted_shape = pyprt.InitialShape(
             mod_vertices_shift, model[0].get_indices(), model[0].get_faces())
 
-        m2 = pyprt.ModelGenerator([shifted_shape])
+        mod_generator2 = pyprt.ModelGenerator([shifted_shape])
 
         slpk_encoder = 'com.esri.prt.codecs.I3SEncoder'
 
         slpk_encoder_options = {
             'sceneType': "Local",
-            'baseName': self.fname,
+            'baseName': self.filename,
             'sceneWkid': "3857",
             'layerTextureEncoding': ["2"],
             'layerEnabled': [True],
@@ -97,18 +98,18 @@ class MainHandler(tornado.web.RequestHandler):
             'outputPath': OUTPUT_PATH
         }
 
-        m2.generate_model([shape_attributes], RPK,
-                          slpk_encoder, slpk_encoder_options)
-        self.final_filename_slpk = os.path.join(
-            OUTPUT_PATH, self.fname + '.slpk')
+        mod_generator2.generate_model([shape_attributes], RPK,
+                                      slpk_encoder, slpk_encoder_options)
+        self.filename_slpk = os.path.join(
+            OUTPUT_PATH, self.filename + '.slpk')
 
     def publish(self):
         slpk_item = self.gis.content.add(
             {
-                "title": f"AX_{self.fname}",
+                "title": f"PyPRT_webApp_{self.filename}",
                 "tags": "slpk",
             },
-            data=self.final_filename_slpk,
+            data=self.filename_slpk,
             folder=AGO_DATA_DIR
         )
 
@@ -125,7 +126,7 @@ class MainHandler(tornado.web.RequestHandler):
         print('Converting file')
         self.convert_to_slpk()
 
-        print(f'Publishing file: {self.final_filename_slpk}')
+        print(f'Publishing file: {self.filename_slpk}')
         id = self.publish()
         print(f'Published')
 
@@ -135,7 +136,7 @@ class MainHandler(tornado.web.RequestHandler):
     def on_finish(self):
         print('Cleaning up')
         os.remove(self.file_path)
-        os.remove(self.final_filename_slpk)
+        os.remove(self.filename_slpk)
 
 
 if not os.path.exists(OUTPUT_PATH):
@@ -145,9 +146,9 @@ if not os.path.exists(OUTPUT_PATH):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='ArcGIS Online credentials')
     parser.add_argument(
-        '--username', help='Your username for AGO', type=str, required=False)
+        '--username', help='Your username for AGO', type=str, required=True)
     parser.add_argument(
-        '--password', help='Your password for AGO', type=str, required=False)
+        '--password', help='Your password for AGO', type=str, required=True)
     parser.add_argument('--url', help='Url of AGO instance', type=str,
                         default='https://www.arcgis.com')
 
