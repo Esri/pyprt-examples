@@ -10,7 +10,7 @@ import tornado.web
 import pyprt
 from arcgis.gis import GIS
 
-
+DBG = True
 CS_FOLDER = Path().absolute()
 ROOT = os.path.join(CS_FOLDER, 'ex9_html')
 OUTPUT_PATH = os.path.join(CS_FOLDER, 'ex9_output')
@@ -43,8 +43,9 @@ class MainHandler(tornado.web.RequestHandler):
         y_coord = self.get_argument("y_coordinate")
         elev = self.get_argument("elevation")
 
-        print(f'Setting georef to ({x_coord}, {y_coord}) (Web Mercator)')
-        print(f'Elevation in meters: {elev}')
+        if DBG:
+            print(
+                f'Setting georef to ({round(float(x_coord),2)}, {round(float(y_coord),2)}) (Web Mercator) with elevation {int(float(elev))} meters')
 
         # Model Generator Instance
         mod_generator1 = pyprt.ModelGenerator(
@@ -120,21 +121,23 @@ class MainHandler(tornado.web.RequestHandler):
         return slpk_item_published.id
 
     def post(self):
-        print('Saving file')
         self.save_file()
-
-        print('Converting file')
         self.convert_to_slpk()
 
-        print(f'Publishing file: {self.filename_slpk}')
-        id = self.publish()
-        print(f'Published')
+        if DBG:
+            print('Publishing file on ArcGIS Online:')
+            print(self.filename_slpk)
 
+        id = self.publish()
         self.write(json.dumps({'portalId': id}))
         self.finish()
 
     def on_finish(self):
-        print('Cleaning up')
+        if DBG:
+            print('Cleaning up files:')
+            print(self.file_path)
+            print(self.filename_slpk)
+
         os.remove(self.file_path)
         os.remove(self.filename_slpk)
 
