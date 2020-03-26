@@ -19,6 +19,29 @@ PORT = 9999
 AGO_DATA_DIR = 'modelVisServerData'
 
 
+def georef_shift_vertices(model_vertices, x_coord_goal, y_coord_goal, z_coord_goal):
+    shifted_vertices = model_vertices.copy()
+
+    # Bounding box
+    min_y_value = min(model_vertices[1::3])
+    mod_x_values = model_vertices[0::3]
+    center_x_value = min(mod_x_values)+(
+        max(mod_x_values)-min(mod_x_values))/2.0
+    mod_z_values = model_vertices[2::3]
+    center_z_value = min(mod_z_values)+(
+        max(mod_z_values)-min(mod_z_values))/2.0
+
+    # Offset the initial shape at the right location
+    shifted_vertices[0::3] = [a-center_x_value +
+                              x_coord_goal for a in shifted_vertices[0::3]]
+    shifted_vertices[1::3] = [
+        a-min_y_value+z_coord_goal for a in shifted_vertices[1::3]]
+    shifted_vertices[2::3] = [a-center_z_value -
+                              y_coord_goal for a in shifted_vertices[2::3]]
+
+    return shifted_vertices
+
+
 class MainHandler(tornado.web.RequestHandler):
     def initialize(self, gis):
         self.filename = ''
@@ -57,25 +80,10 @@ class MainHandler(tornado.web.RequestHandler):
         model = mod_generator1.generate_model([shape_attributes], RPK,
                                               'com.esri.pyprt.PyEncoder', {'emitReport': False})
 
-        # Bounding box
+        # Shift to right location
         mod_vertices = model[0].get_vertices()
-
-        min_y_value = min(mod_vertices[1::3])
-        mod_x_values = mod_vertices[0::3]
-        center_x_value = min(mod_x_values)+(
-            max(mod_x_values)-min(mod_x_values))/2.0
-        mod_z_values = mod_vertices[2::3]
-        center_z_value = min(mod_z_values)+(
-            max(mod_z_values)-min(mod_z_values))/2.0
-
-        # Offset the initial shape at the right location
-        mod_vertices_shift = mod_vertices.copy()
-        mod_vertices_shift[0::3] = [a-center_x_value +
-                                    float(x_coord) for a in mod_vertices_shift[0::3]]
-        mod_vertices_shift[1::3] = [
-            a-min_y_value+float(elev) for a in mod_vertices_shift[1::3]]
-        mod_vertices_shift[2::3] = [a-center_z_value -
-                                    float(y_coord) for a in mod_vertices_shift[2::3]]
+        mod_vertices_shift = georef_shift_vertices(
+            mod_vertices, float(x_coord), float(y_coord), float(elev))
 
         shifted_shape = pyprt.InitialShape(
             mod_vertices_shift, model[0].get_indices(), model[0].get_faces())
@@ -83,7 +91,6 @@ class MainHandler(tornado.web.RequestHandler):
         mod_generator2 = pyprt.ModelGenerator([shifted_shape])
 
         slpk_encoder = 'com.esri.prt.codecs.I3SEncoder'
-
         slpk_encoder_options = {
             'sceneType': "Local",
             'baseName': self.filename,
