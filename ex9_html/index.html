@@ -47,9 +47,7 @@
           basemap: "gray",
           ground: "world-elevation"
         });
-        var sceneLayer = undefined;
-		    var spatialRef = new SpatialReference({wkid: 3857})
-		
+
         // Create the SceneView
         var view = new SceneView({
           container: "viewDiv",
@@ -60,19 +58,46 @@
             heading: 0
           }
         });
-		
-        // Elevation layer toggle
-        view.when(function() {
-          document.getElementById("elevationInput").addEventListener("change", updateElevation);
-          
-          function updateElevation(ev) {
-            // Turn ground layers visibility on/off
-            map.ground.layers.forEach(function(layer) {
-              layer.visible = ev.target.checked;
-            });
-          }
+
+        var sceneLayer = undefined;
+		    var spatialRef = new SpatialReference({wkid: 3857})
+        var position = new Point(x=950654.3290831866,y=6004190.025580572, spatialReference=spatialRef);
+
+        var myDropzone = new Dropzone("#dropzone-form", {
+          url: "/file-upload",
+          timeout: 300000 // 15 min
         });
-        
+		
+        // Drop point symbology
+        var dropPointSymbol = {
+          type: "point-3d", // autocasts as new PointSymbol3D()
+          symbolLayers: [
+            {
+              type: "icon", // autocasts as new ObjectSymbol3DLayer()
+              material: {
+                color: "black"
+              },
+              resources: {
+                primitive: "circle"
+              },
+              width: 8
+            }
+          ],
+          verticalOffset: {
+            screenLength: 40,
+            maxWorldLength: 100,
+            minWorldLength: 20
+          },
+          callout: {
+            type: "line",  // autocasts as new LineCallout3D()
+            size: 1.5,
+            color: "white",
+            border: {
+              color: "black"
+            }
+          }
+        };
+
         var loadScenelayer = function(portalId) {
           console.log("Adding scenelayer");
           if (sceneLayer) {
@@ -115,49 +140,30 @@
             try {
               view.goTo(sceneLayer.fullExtent);
             } catch (error) {
-              console.log(error);
+              console.error(error);
             }
           });
         };
-        
+
         var url_string = window.location.href;
         var url = new URL(url_string);
         var pId = url.searchParams.get("portalid");
         if (pId) {
           loadScenelayer(pId);
         }
-        
-        // Drop point clicked
-        var dropPointSymbol = {
-          type: "point-3d", // autocasts as new PointSymbol3D()
-          symbolLayers: [
-            {
-              type: "icon", // autocasts as new ObjectSymbol3DLayer()
-              material: {
-                color: "black"
-              },
-              resources: {
-                primitive: "circle"
-              },
-              width: 8
-            }
-          ],
-          verticalOffset: {
-            screenLength: 40,
-            maxWorldLength: 100,
-            minWorldLength: 20
-          },
-          callout: {
-            type: "line",  // autocasts as new LineCallout3D()
-            size: 1.5,
-            color: "white",
-            border: {
-              color: "black"
-            }
+		
+        // Elevation layer toggle
+        view.when(function() {
+          document.getElementById("elevationInput").addEventListener("change", updateElevation);
+          
+          function updateElevation(ev) {
+            // Turn ground layers visibility on/off
+            map.ground.layers.forEach(function(layer) {
+              layer.visible = ev.target.checked;
+            });
           }
-        };
+        });
         
-        var position = new Point(x=950654.3290831866,y=6004190.025580572, spatialReference=spatialRef);
         view.on("double-click", function(event) {
           position = event.mapPoint;
           console.log("Drop point coordinates (Web Mercator): (" + position.x + ", " + position.y + ")");
@@ -176,12 +182,12 @@
             });
             position.z = result.geometry.z;
             console.log("Drop point elevation (meters): " + document.getElementById("elevation").value);
-            view.goTo(new Point(x=position.x, y=position.y, z=position.z+100, spatialReference=spatialRef));
             }
           );
           // Failed to sample (e.g. service unavailable)
           queryElev.catch(function(error) {
             console.error("Failed to query elevation:", error);
+            position.z = 0.0
           });
         
           // Clear graphics from previous result (if applicable)
@@ -222,13 +228,9 @@
             // Failed to sample (e.g. service unavailable)
             queryCamElev.catch(function(camError) {
               console.error("Failed to query elevation:", camError);
+              document.getElementById("elevation").value = 0.0;
             });
           }
-        });
-        
-        var myDropzone = new Dropzone("#dropzone-form", {
-          url: "/file-upload",
-          timeout: 300000 // 15 min
         });
 
         myDropzone.on("success", function(file, resp) {
