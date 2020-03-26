@@ -35,8 +35,8 @@ class MainHandler(tornado.web.RequestHandler):
                                                                                              string.digits) for x in range(5))
         self.extension_filename = self.filename + extension
         self.file_path = os.path.join(OUTPUT_PATH, self.extension_filename)
-        output_file = open(self.file_path, 'wb')
-        output_file.write(uploaded_file['body'])
+        with open(self.file_path, 'wb') as output_file:
+            output_file.write(uploaded_file['body'])
 
     def convert_to_slpk(self):
         x_coord = self.get_argument("x_coordinate")
@@ -61,10 +61,12 @@ class MainHandler(tornado.web.RequestHandler):
         mod_vertices = model[0].get_vertices()
 
         min_y_value = min(mod_vertices[1::3])
-        center_x_value = min(mod_vertices[0::3])+(
-            max(mod_vertices[0::3])-min(mod_vertices[0::3]))/2.0
-        center_z_value = min(mod_vertices[2::3])+(
-            max(mod_vertices[2::3])-min(mod_vertices[2::3]))/2.0
+        mod_x_values = mod_vertices[0::3]
+        center_x_value = min(mod_x_values)+(
+            max(mod_x_values)-min(mod_x_values))/2.0
+        mod_z_values = mod_vertices[2::3]
+        center_z_value = min(mod_z_values)+(
+            max(mod_z_values)-min(mod_z_values))/2.0
 
         # Offset the initial shape at the right location
         mod_vertices_shift = mod_vertices.copy()
