@@ -44,7 +44,7 @@
         esriConfig.portalUrl = "https://www.arcgis.com";
         // Create Map
         var map = new Map({
-          basemap: "gray",
+          basemap: "topo",
           ground: "world-elevation"
         });
 
@@ -122,10 +122,6 @@
             symbolLayers: [
               {
                 type: "fill", // autocasts as new FillSymbol3DLayer()
-                // If the value of material is not assigned, the default color will be yellow
-                material: {
-                  color: [244, 247, 134]
-                }
               }
             ]
           };
