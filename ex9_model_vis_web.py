@@ -161,12 +161,11 @@ if __name__ == '__main__':
         '--username', help='Your username for AGO', type=str, required=True)
     parser.add_argument(
         '--password', help='Your password for AGO', type=str, required=True)
-    parser.add_argument('--url', help='Url of AGO instance', type=str,
-                        default='https://www.arcgis.com')
 
     args = parser.parse_args()
 
-    gis = GIS(url=args.url, username=args.username, password=args.password)
+    gis = GIS(url='https://www.arcgis.com',
+              username=args.username, password=args.password)
 
     # Create folder for scene layers
     gis.content.create_folder(AGO_DATA_DIR)
