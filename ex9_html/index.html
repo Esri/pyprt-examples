@@ -19,6 +19,10 @@
       #elevationDiv {
         padding-left: 0.5em;
       }
+      #textBox {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+      }
     </style>
 
     <link
@@ -204,6 +208,7 @@
         // UI
         view.ui.add("uploadDiv", "top-right");
         view.ui.add("elevationDiv", "top-left");
+        view.ui.add("textBox", "bottom-right");
 
         // Watch the change on view.camera
         view.watch("camera", camera => {
@@ -269,6 +274,14 @@
           value="411.0"
         />
       </form>
+    </div>
+    <div id="textBox" class="esri-widget">
+      <p> 1. Optionally double click on the map where the geometry should be placed.
+      </p>
+      <p> 2. Optionally uncheck the elevation layer to have the 3D geometry on a flat ground.
+      </p>
+      <p> 3. Drag and drop the geometry file in the top right white box to place it on the map.
+      </p>
     </div>
   </body>
 </html>
