@@ -40,10 +40,10 @@
         "esri/views/SceneView",
         "esri/layers/SceneLayer",
         "esri/config",
-		    "esri/geometry/SpatialReference",
-		    "esri/geometry/Point",
-		    "esri/Graphic",
-		    "esri/geometry/support/webMercatorUtils"
+        "esri/geometry/SpatialReference",
+        "esri/geometry/Point",
+        "esri/Graphic",
+        "esri/geometry/support/webMercatorUtils"
       ],
       function(
         Map, SceneView, SceneLayer, esriConfig, SpatialReference, Point, Graphic, webMercatorUtils
@@ -67,7 +67,7 @@
         });
 
         var sceneLayer = undefined;
-		    var spatialRef = new SpatialReference({wkid: 3857})
+        var spatialRef = new SpatialReference({wkid: 3857});
         var position = new Point(x=950654.3290831866,y=6004190.025580572, spatialReference=spatialRef);
 
         var myDropzone = new Dropzone("#dropzone-form", {
@@ -249,8 +249,8 @@
 
   <body>
     <div id="viewDiv"></div>
-	  <div id="elevationDiv" class="esri-widget">
-	    <label
+    <div id="elevationDiv" class="esri-widget">
+      <label
         >Elevation: <input id="elevationInput" type="checkbox" checked="yes" />
       </label>
     <div id="uploadDiv" class="esri-widget">
@@ -261,13 +261,13 @@
           name="x_coordinate"
           value="950654.3290831866"
         />
-		    <input
-		      type="hidden"
-		      id="y_coordinate"
-		      name="y_coordinate"
-		      value="6004190.025580572"
-		    />
-		    <input
+        <input
+          type="hidden"
+          id="y_coordinate"
+          name="y_coordinate"
+          value="6004190.025580572"
+        />
+        <input
           type="hidden"
           id="elevation"
           name="elevation"
