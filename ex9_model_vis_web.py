@@ -19,6 +19,13 @@ PORT = 9999
 AGO_DATA_DIR = 'modelVisServerData'
 
 
+allowed = set(string.ascii_letters + string.digits + '-' + '_')
+
+
+def check(file_basename):
+    return set(file_basename) <= allowed
+
+
 def georef_shift_vertices(model_vertices, x_coord_goal, y_coord_goal, z_coord_goal):
     shifted_vertices = model_vertices.copy()
 
@@ -53,6 +60,12 @@ class MainHandler(tornado.web.RequestHandler):
         extension = os.path.splitext(original_filename)[1]
         self.basename = os.path.splitext(original_filename)[0] + '_' + ''.join(random.choice(string.ascii_lowercase +
                                                                                              string.digits) for x in range(5))
+        if not check(self.basename):
+            self.basename = ''.join(random.choice(
+                string.ascii_lowercase + string.digits) for x in range(10))
+            print(
+                f'Warning: Invalid basename. Filename renamed to: {self.basename}')
+
         extension_filename = self.basename + extension
         self.file_path = os.path.join(OUTPUT_PATH, extension_filename)
         with open(self.file_path, 'wb') as output_file:
