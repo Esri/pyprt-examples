@@ -25,11 +25,9 @@ def georef_shift_vertices(model_vertices, x_coord_goal, y_coord_goal, z_coord_go
     # Bounding box
     min_y_value = min(model_vertices[1::3])
     mod_x_values = model_vertices[0::3]
-    center_x_value = min(mod_x_values)+(
-        max(mod_x_values)-min(mod_x_values))/2.0
+    center_x_value = (max(mod_x_values)+min(mod_x_values))/2.0
     mod_z_values = model_vertices[2::3]
-    center_z_value = min(mod_z_values)+(
-        max(mod_z_values)-min(mod_z_values))/2.0
+    center_z_value = (max(mod_z_values)+min(mod_z_values))/2.0
 
     # Offset the initial shape at the right location
     shifted_vertices[0::3] = [a-center_x_value +
