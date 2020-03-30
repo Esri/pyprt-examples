@@ -44,8 +44,7 @@ def georef_shift_vertices(model_vertices, x_coord_goal, y_coord_goal, z_coord_go
 
 class MainHandler(tornado.web.RequestHandler):
     def initialize(self, gis):
-        self.filename = ''
-        self.extension_filename = ''
+        self.basename = ''
         self.file_path = ''
         self.filename_slpk = ''
         self.gis = gis
@@ -54,10 +53,10 @@ class MainHandler(tornado.web.RequestHandler):
         uploaded_file = self.request.files['file'][0]
         original_filename = uploaded_file['filename']
         extension = os.path.splitext(original_filename)[1]
-        self.filename = os.path.splitext(original_filename)[0] + '_' + ''.join(random.choice(string.ascii_lowercase +
+        self.basename = os.path.splitext(original_filename)[0] + '_' + ''.join(random.choice(string.ascii_lowercase +
                                                                                              string.digits) for x in range(5))
-        self.extension_filename = self.filename + extension
-        self.file_path = os.path.join(OUTPUT_PATH, self.extension_filename)
+        extension_filename = self.basename + extension
+        self.file_path = os.path.join(OUTPUT_PATH, extension_filename)
         with open(self.file_path, 'wb') as output_file:
             output_file.write(uploaded_file['body'])
 
@@ -93,7 +92,7 @@ class MainHandler(tornado.web.RequestHandler):
         slpk_encoder = 'com.esri.prt.codecs.I3SEncoder'
         slpk_encoder_options = {
             'sceneType': "Local",
-            'baseName': self.filename,
+            'baseName': self.basename,
             'sceneWkid': "3857",
             'layerTextureEncoding': ["2"],
             'layerEnabled': [True],
@@ -111,12 +110,12 @@ class MainHandler(tornado.web.RequestHandler):
         mod_generator2.generate_model([shape_attributes], RPK,
                                       slpk_encoder, slpk_encoder_options)
         self.filename_slpk = os.path.join(
-            OUTPUT_PATH, self.filename + '.slpk')
+            OUTPUT_PATH, self.basename + '.slpk')
 
     def publish(self):
         slpk_item = self.gis.content.add(
             {
-                "title": f"PyPRT_webApp_{self.filename}",
+                "title": f"PyPRT_webApp_{self.basename}",
                 "tags": "slpk",
             },
             data=self.filename_slpk,
