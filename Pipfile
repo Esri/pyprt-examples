@@ -11,6 +11,7 @@ vispy = "*"
 PyQT5 = "*"
 scipy = "*"
 PyGEL3D = "*"
+tornado = "*"
 
 [pipenv]
 allow_prereleases = true

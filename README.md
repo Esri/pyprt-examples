@@ -67,6 +67,11 @@ Simply run `pip install pyprt` in your desired Python environment or `conda inst
     <td>This example demonstrates how PyPRT can be used with the <a href="https://developers.arcgis.com/python/">ArcGIS API for Python</a> in order to collect data from <a href="https://www.esri.com/en-us/arcgis/products/arcgis-online/overview">ArcGIS Online</a>, generate 3D content and publish the content back to ArcGIS Online.</td>
     <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://www.esri.com/en-us/arcgis/products/create-account">ArcGIS Online account</a>. Also, the published item needs to be manually deleted from the ArcGIS online account before the example script can be run again (we do not want to delete things from your account).</td>
   </tr>
+  <tr>
+    <td>ex9_model_vis_web.py</td>
+    <td>In this example, PyPRT is used as a 3D geometry converter. Using PyPRT, the ArcGIS JavaScript API and the ArcGIS API for Python, you can visualize your 3D model on a map in the Web.</td>
+    <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://www.esri.com/en-us/arcgis/products/create-account">ArcGIS Online account</a>. To try the example, run `python ex9_model_vis_web.py --username=my_AGO_username --password=my_AGO_password` in your Python environment.</td>
+  </tr>
 </table>
 
 

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>Web 3D Geometry Visualization on a Map</title>
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+      #elevationDiv {
+        padding-left: 0.5em;
+      }
+      #textBox {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.14/esri/themes/light/main.css"
+    />
+    <link rel="stylesheet" href="./dropzone.min.css" />
+    <script src="https://js.arcgis.com/4.14/"></script>
+    <script src="./dropzone.min.js"></script>
+
+    <script>
+      Dropzone.autoDiscover = false;
+      require([
+        "esri/Map",
+        "esri/views/SceneView",
+        "esri/layers/SceneLayer",
+        "esri/config",
+        "esri/geometry/SpatialReference",
+        "esri/geometry/Point",
+        "esri/Graphic",
+        "esri/geometry/support/webMercatorUtils"
+      ],
+      function(
+        Map, SceneView, SceneLayer, esriConfig, SpatialReference, Point, Graphic, webMercatorUtils
+      ) {
+        esriConfig.portalUrl = "https://www.arcgis.com";
+        // Create Map
+        var map = new Map({
+          basemap: "topo",
+          ground: "world-elevation"
+        });
+
+        // Create the SceneView
+        var view = new SceneView({
+          container: "viewDiv",
+          map: map,
+          camera: {
+            position: [8.539295, 47.371501, 15000000], // Zurich
+            tilt: 0,
+            heading: 0
+          }
+        });
+
+        var sceneLayer = undefined;
+        var spatialRef = new SpatialReference({wkid: 3857});
+        var position = new Point(x=950654.3290831866,y=6004190.025580572, spatialReference=spatialRef);
+
+        var myDropzone = new Dropzone("#dropzone-form", {
+          url: "/file-upload",
+          timeout: 300000 // 15 min
+        });
+		
+        // Drop point symbology
+        var dropPointSymbol = {
+          type: "point-3d", // autocasts as new PointSymbol3D()
+          symbolLayers: [
+            {
+              type: "icon", // autocasts as new ObjectSymbol3DLayer()
+              material: {
+                color: "black"
+              },
+              resources: {
+                primitive: "circle"
+              },
+              width: 8
+            }
+          ],
+          verticalOffset: {
+            screenLength: 40,
+            maxWorldLength: 100,
+            minWorldLength: 20
+          },
+          callout: {
+            type: "line",  // autocasts as new LineCallout3D()
+            size: 1.5,
+            color: "white",
+            border: {
+              color: "black"
+            }
+          }
+        };
+
+        var loadScenelayer = function(portalId) {
+          console.log("Adding scenelayer");
+          if (sceneLayer) {
+            console.log("Removing scenelayer");
+            map.remove(sceneLayer);
+          }
+
+          sceneLayer = new SceneLayer({
+            portalItem: {
+              id: portalId
+            },
+            spatialReference: spatialRef,
+            popupEnabled: true
+          });
+
+          view.graphics.removeAll();
+          map.add(sceneLayer);
+
+          // Create MeshSymbol3D for symbolizing SceneLayer
+          var symbol = {
+            type: "mesh-3d", // autocasts as new MeshSymbol3D()
+            symbolLayers: [
+              {
+                type: "fill", // autocasts as new FillSymbol3DLayer()
+              }
+            ]
+          };
+              
+          // Add the renderer to sceneLayer
+          sceneLayer.renderer = {
+            type: "simple", // autocasts as new SimpleRenderer()
+            symbol: symbol
+          };
+              
+          sceneLayer.when(function() {
+            try {
+              view.goTo(sceneLayer.fullExtent);
+            } catch (error) {
+              console.error(error);
+            }
+          });
+        };
+
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var pId = url.searchParams.get("portalid");
+        if (pId) {
+          loadScenelayer(pId);
+        }
+		
+        // Elevation layer toggle
+        view.when(function() {
+          document.getElementById("elevationInput").addEventListener("change", updateElevation);
+          
+          function updateElevation(ev) {
+            // Turn ground layers visibility on/off
+            map.ground.layers.forEach(function(layer) {
+              layer.visible = ev.target.checked;
+            });
+          }
+        });
+        
+        view.on("double-click", function(event) {
+          position = event.mapPoint;
+          console.log("Drop point coordinates (Web Mercator): (" + position.x + ", " + position.y + ")");
+          var queryElev = map.ground.queryElevation(position);
+          document.getElementById("x_coordinate").value = position.x;
+          document.getElementById("y_coordinate").value = position.y;
+          
+          queryElev.then(
+            function(result) {
+            map.ground.layers.forEach(function(layer) {
+              if(layer.visible) {
+                document.getElementById("elevation").value = result.geometry.z;
+              } else {
+                document.getElementById("elevation").value = 0.0;
+              }
+            });
+            position.z = result.geometry.z;
+            console.log("Drop point elevation (meters): " + document.getElementById("elevation").value);
+            }
+          );
+          // Failed to sample (e.g. service unavailable)
+          queryElev.catch(function(error) {
+            console.error("Failed to query elevation:", error);
+            position.z = 0.0
+          });
+        
+          // Clear graphics from previous result (if applicable)
+          view.graphics.removeAll();
+
+          // Draw a point graphic for position before landslide
+          view.graphics.add(
+            new Graphic({
+              geometry: position,
+              symbol: dropPointSymbol
+            })
+          );
+        });
+
+        // UI
+        view.ui.add("uploadDiv", "top-right");
+        view.ui.add("elevationDiv", "top-left");
+        view.ui.add("textBox", "bottom-right");
+
+        // Watch the change on view.camera
+        view.watch("camera", camera => {
+          if (view.graphics.length == 0) {
+            var xyPoint = webMercatorUtils.lngLatToXY(camera.position.longitude, camera.position.latitude);
+            document.getElementById("x_coordinate").value = xyPoint[0];
+            document.getElementById("y_coordinate").value = xyPoint[1];
+            
+            var queryCamElev = map.ground.queryElevation(new Point(x=xyPoint[0], y=xyPoint[1], spatialReference=spatialRef));
+
+            queryCamElev.then(function(camResult) {
+              map.ground.layers.forEach(function(layer) {
+                if(layer.visible) {
+                  document.getElementById("elevation").value = camResult.geometry.z;
+                } else {
+                  document.getElementById("elevation").value = 0.0;
+                }
+              });
+            });
+
+            // Failed to sample (e.g. service unavailable)
+            queryCamElev.catch(function(camError) {
+              console.error("Failed to query elevation:", camError);
+              document.getElementById("elevation").value = 0.0;
+            });
+          }
+        });
+
+        myDropzone.on("success", function(file, resp) {
+          /* Maybe display some more file information on your page */
+          const jsonResponse = JSON.parse(resp);
+          loadScenelayer(jsonResponse.portalId);
+        });
+      });
+      document.addEventListener("DOMContentLoaded", function() {});
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+    <div id="elevationDiv" class="esri-widget">
+      <label
+        >Elevation: <input id="elevationInput" type="checkbox" checked="yes" />
+      </label>
+    <div id="uploadDiv" class="esri-widget">
+      <form id="dropzone-form" action="/file-upload" class="dropzone">
+        <input
+          type="hidden"
+          id="x_coordinate"
+          name="x_coordinate"
+          value="950654.3290831866"
+        />
+        <input
+          type="hidden"
+          id="y_coordinate"
+          name="y_coordinate"
+          value="6004190.025580572"
+        />
+        <input
+          type="hidden"
+          id="elevation"
+          name="elevation"
+          value="411.0"
+        />
+      </form>
+    </div>
+    <div id="textBox" class="esri-widget">
+      <p> 1. Optionally double click on the map where the geometry should be placed.
+      </p>
+      <p> 2. Optionally uncheck the elevation layer to have the 3D geometry on a flat ground.
+      </p>
+      <p> 3. Drag and drop the geometry file in the top right white box to place it on the map.
+      </p>
+    </div>
+  </body>
+</html>
