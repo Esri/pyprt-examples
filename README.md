@@ -69,7 +69,7 @@ Simply run `pip install pyprt` in your desired Python environment or `conda inst
   </tr>
   <tr>
     <td>ex9_model_vis_web.py</td>
-    <td>In this example, PyPRT is used as a 3D geometry converter. Using PyPRT, the ArcGIS JavaScript API and the ArcGIS API for Python, you can visualize your 3D model on a map in the Web.</td>
+    <td>In this example, PyPRT is used as a 3D geometry converter. Using PyPRT, the <a href="https://developers.arcgis.com/javascript/">ArcGIS JavaScript API</a> and the <a href="https://developers.arcgis.com/python/">ArcGIS API for Python</a>, you can visualize your 3D model on a map in the Web.</td>
     <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://www.esri.com/en-us/arcgis/products/create-account">ArcGIS Online account</a>. To try the example, run
 	  <code>
 	    python ex9_model_vis_web.py --username=my_AGO_username --password=my_AGO_password
