@@ -152,6 +152,16 @@ To run the examples please follow these steps:
     <td> </td>
     <td>Performs the identity operation.</td>
   </tr>
+  <tr>
+    <td>translateModel.rpk</td>
+    <td>bin/translateModel.cgb</br></br>
+    	Default$Lot</td>
+    <td>vec_x: 0
+		vec_y: 0
+		vec_z: 0
+	</td>
+    <td>Allows translating the initial shape in x, y and z directions.</td>
+  </tr>
 </table>
 
 ## License
