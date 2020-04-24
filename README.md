@@ -156,9 +156,9 @@ To run the examples please follow these steps:
     <td>translateModel.rpk</td>
     <td>bin/translateModel.cgb</br></br>
     	Default$Lot</td>
-    <td>vec_x: 0
-		vec_y: 0
-		vec_z: 0
+    <td>vec_x: 0</br>
+		vec_y: 0</br>
+		vec_z: 0</br>
 	</td>
     <td>Allows translating the initial shape in x, y and z directions.</td>
   </tr>
