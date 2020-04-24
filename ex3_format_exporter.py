@@ -36,7 +36,8 @@ if not pyprt.is_prt_initialized():
 
 # Data
 rpk = asset_file('candler.rpk')
-attrs = {'ruleFile': 'bin/candler.cgb', 'startRule': 'Default$Footprint'}
+attrs = {'ruleFile': 'bin/candler.cgb',
+         'startRule': 'Default$Footprint'}
 
 
 # Initial Shapes
@@ -49,12 +50,12 @@ shape_geometry_2 = pyprt.InitialShape(
 # PRT Generation
 m = pyprt.ModelGenerator([shape_geometry_2, shape_geometry_1])
 
-encoderOptions = {'outputPath': '/tmp/pyprt_output'}
-os.makedirs(encoderOptions['outputPath'], exist_ok=True)
+encoder_options = {'outputPath': '/tmp/pyprt_output'}
+os.makedirs(encoder_options['outputPath'], exist_ok=True)
 
 models = m.generate_model(
-    [attrs], rpk, 'com.esri.prt.codecs.OBJEncoder', encoderOptions)
-print('\nGenerated models located in '+encoderOptions['outputPath'])
+    [attrs], rpk, 'com.esri.prt.codecs.OBJEncoder', encoder_options)
+print('\nGenerated models located in '+encoder_options['outputPath'])
 
 
 # PRT End

@@ -88,15 +88,15 @@ if __name__ == '__main__':
     if not pyprt.is_prt_initialized():
         raise Exception('PRT is not initialized')
 
-    initialGeometry = pyprt.InitialShape(
+    initial_geometry = pyprt.InitialShape(
         np.array([0, 0, 0,  0, 0, 2,  1, 0, 1,  1, 0, 0], dtype='f'))
-    initialGeometry2 = pyprt.InitialShape(
+    initial_geometry2 = pyprt.InitialShape(
         np.array([4, 0, 0,  4, 0, 2,  5, 0, 1,  5, 0, 0], dtype='f'))
     rpk = asset_file('extrusion_rule.rpk')
     attrs = {'ruleFile': 'bin/extrusion_rule.cgb',
              'startRule': 'Default$Footprint'}
 
-    mod = pyprt.ModelGenerator([initialGeometry, initialGeometry2])
+    mod = pyprt.ModelGenerator([initial_geometry, initial_geometry2])
     generated_mod = mod.generate_model(
         [attrs], rpk, 'com.esri.pyprt.PyEncoder', {})
     all_vertices = []
