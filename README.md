@@ -4,13 +4,20 @@ PyPRT is a Python binding for PRT (CityEngine Procedural Runtime). It enables th
 
 This repo contains examples of PyPRT usage. You can find the source code in the main [pyprt](https://github.com/Esri/pyprt) repository. More detailed information is available there.
 
-![Generated geometry exported as OBJ (ex7)](images/building.png) ![Generated parks and trees (ex8)](images/generated_trees.png)
+<p align="center">
+  <img src="images/building.png">
+</p>
+
+<p align="center">
+  <img src="images/generated_trees.png">
+</p>
 
 ## Table of Contents
 
 * [Installation](#installation)
 * [Examples](#examples)
 * [Running the examples](#running-the-examples)
+* [Provided Rule Packages](#provided-rule-packages)
 * [License](#license)
 
 
@@ -65,7 +72,7 @@ Simply run `pip install pyprt` in your desired Python environment or `conda inst
   <tr>
     <td>ex8_3d_gis_content_generation.ipynb</td>
     <td>This example demonstrates how PyPRT can be used with the <a href="https://developers.arcgis.com/python/">ArcGIS API for Python</a> in order to collect data from <a href="https://www.esri.com/en-us/arcgis/products/arcgis-online/overview">ArcGIS Online</a>, generate 3D content and publish the content back to ArcGIS Online.</td>
-    <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://www.esri.com/en-us/arcgis/products/create-account">ArcGIS Online account</a>. Also, the published item needs to be manually deleted from the ArcGIS online account before the example script can be run again (we do not want to delete things from your account).</td>
+    <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://developers.arcgis.com/">ArcGIS Developer account</a>. Also, the published item needs to be manually deleted from the ArcGIS Online account before the example script can be run again (we do not want to delete things from your account).</td>
   </tr>
   <tr>
     <td>ex9_model_vis_web.py</td>
@@ -89,6 +96,116 @@ To run the examples please follow these steps:
 1. Change into the virtual python environment: `pipenv shell`
 1. Now run e.g. `python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `jupyter notebook` and open the desired example notebook in the opening browser page. 
 
+## Provided Rule Packages
+
+<table style="width:100%">
+  <tr>
+    <th>Rule Package</th>
+    <th>CGB Rule File</th>
+	<th>Start Rule</th> 
+    <th>Shape Attributes</th>
+	<th>Attributes Default Values</th>
+    <th>Brief Description</th>
+  </tr>
+  <tr>
+    <td>candler.rpk</td>
+    <td>bin/candler.cgb</td>
+	<td>Default$Footprint</td>
+    <td>BuildingHeight</br>
+		Mode</br>
+		FloorHeight</br>
+		GroundfloorHeight</br>
+		TileWidth</br>
+		CorniceOverhang</br>
+		WindowHeight</br>
+		FrontWindowWidth</br>
+		RearWindowWidth</br>
+		SillSize</br>
+		CornerWallWidth</br>
+		WallTexture</br>
+		ColorizeWall</td>
+	<td>62.0</br>
+		"Visualization"</br>
+		3.5</br>
+		4.3</br>
+		3.55</br>
+		1.2</br>
+		2.05</br>
+		2.15</br>
+		1.2</br>
+		0.26</br>
+		1.0</br>
+		"facade/walls/bricks.jpg"</br>
+		"#FCEFE2"</td>
+    <td>Allows generating a "candler" building model, which is textured, detailed and realistic.</td>
+  </tr>
+  <tr>
+    <td>envelope2002.rpk</td>
+    <td>rules/typology/envelope2002.cgb</td>
+    <td>Default$Lot</td>
+    <td>Density_bonus_height</br>
+		shape_of_building</br>
+		lot_coverage_parameter</br>
+		height_first_tier</br>
+		first_setback_size</br>
+		height_second_tier</br>
+		second_setback_size</br>
+		ground_floors_use</br>
+		main_building_use</br>
+		create_green_spaces</br>
+		report_but_not_display_green</br>
+		etc...</td>
+	<td>60.0</br>
+		1.0</br>
+		60.0</br>
+		12.2</br>
+		3.0</br>
+		40.0</br>
+		3.0</br>
+		"commercial"</br>
+		"residential"</br>
+		false</br>
+		false</br>
+		etc...</td>
+    <td>Allows generating a realistic and detailed building.</td>
+  </tr>
+  <tr>
+    <td>extrusion_rule.rpk</td>
+    <td>bin/extrusion_rule.cgb</td>
+    <td>Default$Footprint</td>
+    <td>minBuildingHeight</br>
+		maxBuildingHeight</br>
+		buildingColor</br>
+		OBJECTID</br>
+		text</td>
+	<td>10.0</br>
+		30.0</br>
+		"#FF00FF"</br>
+		0.0</br>
+		"salut"</td>
+    <td>Performs a simple extrusion of the initial shape with a height equals to a random number between the min and maxBuildingHeight.</td>
+  </tr>
+  <tr>
+    <td>noRule.rpk</td>
+    <td>bin/noRule.cgb</td>
+    <td>Default$Lot</td>
+    <td> </td>
+	<td> </td>
+    <td>Performs the identity operation.</td>
+  </tr>
+  <tr>
+    <td>translateModel.rpk</td>
+    <td>bin/translateModel.cgb</td>
+    <td>Default$Lot</td>
+    <td>vec_x</br>
+		vec_y</br>
+		vec_z</td>
+	<td>0.0</br>
+		0.0</br>
+		0.0</td>
+    <td>Allows translating the initial shape in x, y and z directions.</td>
+  </tr>
+</table>
 
 ## License
 
