@@ -91,14 +91,15 @@ To run the examples please follow these steps:
 <table style="width:100%">
   <tr>
     <th>Rule Package</th>
-    <th>CGB Rule File and Start Rule</th>  
+    <th>CGB Rule File</th>
+	<th>Start Rule</th> 
     <th>Shape Attributes and Default Values</th>
     <th>Brief Description</th>
   </tr>
   <tr>
     <td>candler.rpk</td>
-    <td>bin/candler.cgb</br></br>
-	Default$Footprint</td>
+    <td>bin/candler.cgb</td>
+	<td>Default$Footprint</td>
     <td>BuildingHeight: 62</br>
 		Mode: Visualization"</br>
 		FloorHeight: 3.5</br>
@@ -116,8 +117,8 @@ To run the examples please follow these steps:
   </tr>
   <tr>
     <td>envelope2002.rpk</td>
-    <td>rules/typology/envelope2002.cgb</br></br>
-    	Default$Lot</td>
+    <td>rules/typology/envelope2002.cgb</td>
+    <td>Default$Lot</td>
     <td>Density_bonus_height: 60</br>
 		shape_of_building: 1</br>
 		lot_coverage_parameter: 60</br>
@@ -135,8 +136,8 @@ To run the examples please follow these steps:
   </tr>
   <tr>
     <td>extrusion_rule.rpk</td>
-    <td>bin/extrusion_rule.cgb</br></br>
-    	Default$Footprint</td>
+    <td>bin/extrusion_rule.cgb</td>
+    <td>Default$Footprint</td>
     <td>minBuildingHeight: 10</br>
 		maxBuildingHeight: 30</br>
 		buildingColor: "#FF00FF"</br>
@@ -147,15 +148,15 @@ To run the examples please follow these steps:
   </tr>
   <tr>
     <td>noRule.rpk</td>
-    <td>bin/noRule.cgb</br></br>
-    	Default$Lot</td>
+    <td>bin/noRule.cgb</td>
+    <td>Default$Lot</td>
     <td> </td>
     <td>Performs the identity operation.</td>
   </tr>
   <tr>
     <td>translateModel.rpk</td>
-    <td>bin/translateModel.cgb</br></br>
-    	Default$Lot</td>
+    <td>bin/translateModel.cgb</td>
+    <td>Default$Lot</td>
     <td>vec_x: 0</br>
 		vec_y: 0</br>
 		vec_z: 0</br>
