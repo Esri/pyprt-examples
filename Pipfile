@@ -13,8 +13,5 @@ scipy = "*"
 PyGEL3D = "*"
 tornado = "*"
 
-[pipenv]
-allow_prereleases = true
-
 [requires]
 python_version = "3.6"
