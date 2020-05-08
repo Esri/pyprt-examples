@@ -23,6 +23,8 @@ import math
 from pathlib import Path
 import tornado.ioloop
 import tornado.web
+import webbrowser
+from threading import Timer
 import pyprt
 from arcgis.gis import GIS
 
@@ -181,6 +183,10 @@ if not os.path.exists(OUTPUT_PATH):
     os.makedirs(OUTPUT_PATH)
 
 
+def open_browser():
+    webbrowser.open_new(f'http://localhost:{PORT}/')
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='ArcGIS Online credentials')
     parser.add_argument(
@@ -205,4 +211,5 @@ if __name__ == '__main__':
     pyprt.initialize_prt()
     application.listen(PORT)
     print(f'Listening on Port={PORT}')
+    Timer(1, open_browser).start()
     tornado.ioloop.IOLoop.instance().start()
