@@ -1,0 +1,17 @@
+name: pyprt-examples
+channels:
+  - esri
+  - defaults
+  - anaconda
+  - esri-rd-zurich
+dependencies:
+  - pip
+  - python=3.6
+  - pyprt
+  - arcgis=1.7.1
+  - notebook
+  - scipy
+  - vispy
+  - pip:
+    - pygel3d
+    - pyqt5
