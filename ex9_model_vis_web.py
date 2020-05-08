@@ -18,6 +18,7 @@ import random
 import string
 import json
 import argparse
+import getpass
 import math
 from pathlib import Path
 import tornado.ioloop
@@ -184,13 +185,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='ArcGIS Online credentials')
     parser.add_argument(
         '--username', help='Your username for AGO', type=str, required=True)
-    parser.add_argument(
-        '--password', help='Your password for AGO', type=str, required=True)
 
     args = parser.parse_args()
+    user_pwd = getpass.getpass(prompt='Enter your AGOL password: ')
 
     gis = GIS(url='https://www.arcgis.com',
-              username=args.username, password=args.password)
+              username=args.username, password=user_pwd)
 
     # Create folder for scene layers
     gis.content.create_folder(AGO_DATA_DIR)
