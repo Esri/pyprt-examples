@@ -1,12 +1,30 @@
+# Copyright (c) 2012-2020 Esri R&D Center Zurich
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#   http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# A copy of the license is available in the repository's LICENSE file.
+
 import os
 import random
 import string
 import json
 import argparse
+import getpass
 import math
 from pathlib import Path
 import tornado.ioloop
 import tornado.web
+import webbrowser
+from threading import Timer
 import pyprt
 from arcgis.gis import GIS
 
@@ -165,17 +183,20 @@ if not os.path.exists(OUTPUT_PATH):
     os.makedirs(OUTPUT_PATH)
 
 
+def open_browser():
+    webbrowser.open_new(f'http://localhost:{PORT}/')
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='ArcGIS Online credentials')
     parser.add_argument(
         '--username', help='Your username for AGO', type=str, required=True)
-    parser.add_argument(
-        '--password', help='Your password for AGO', type=str, required=True)
 
     args = parser.parse_args()
+    user_pwd = getpass.getpass(prompt='Enter your AGOL password: ')
 
     gis = GIS(url='https://www.arcgis.com',
-              username=args.username, password=args.password)
+              username=args.username, password=user_pwd)
 
     # Create folder for scene layers
     gis.content.create_folder(AGO_DATA_DIR)
@@ -190,4 +211,5 @@ if __name__ == '__main__':
     pyprt.initialize_prt()
     application.listen(PORT)
     print(f'Listening on Port={PORT}')
+    Timer(1, open_browser).start()
     tornado.ioloop.IOLoop.instance().start()

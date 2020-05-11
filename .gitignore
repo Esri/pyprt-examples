@@ -1,1 +1,4 @@
 /**/Pipfile.lock
+.ipynb_checkpoints/
+.vscode/
+ex*_output/

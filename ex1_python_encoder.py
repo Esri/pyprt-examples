@@ -39,22 +39,21 @@ attrs = {'ruleFile': 'bin/extrusion_rule.cgb',
          'startRule': 'Default$Footprint'}
 
 # Initial Shape
-initial_shape1 = pyprt.InitialShape(
+initial_shape = pyprt.InitialShape(
     [0, 0, 0,  0, 0, 100,  100, 0, 100,  100, 0, 0])
+m = pyprt.ModelGenerator([initial_shape])
 
 # STEP 1: PRT Generation
 print('\nFirst Generation: generated geometry + report\n')
-m1 = pyprt.ModelGenerator([initial_shape1])
-model1 = m1.generate_model([attrs], rpk, 'com.esri.pyprt.PyEncoder', {
-                           'emitGeometry': True, 'emitReport': True})
+model1 = m.generate_model([attrs], rpk, 'com.esri.pyprt.PyEncoder', {
+    'emitGeometry': True, 'emitReport': True})
 visualize_prt_results(model1)
 
 # STEP 2: PRT Generation
 print('\nSecond Generation: generated geometry\n')
-m1 = pyprt.ModelGenerator([initial_shape1])
-model1 = m1.generate_model([attrs], rpk, 'com.esri.pyprt.PyEncoder', {
-                           'emitGeometry': True, 'emitReport': False})
-visualize_prt_results(model1)
+model2 = m.generate_model([attrs], rpk, 'com.esri.pyprt.PyEncoder', {
+    'emitGeometry': True, 'emitReport': False})
+visualize_prt_results(model2)
 
 # PRT End
 print('\nShutdown PRT.')

@@ -4,17 +4,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
-pyprt = "*"
 arcgis = "==1.7.1"
+pyprt = "*"
 notebook = "*"
 vispy = "*"
 PyQT5 = "*"
 scipy = "*"
 PyGEL3D = "*"
 tornado = "*"
-
-[pipenv]
-allow_prereleases = true
 
 [requires]
 python_version = "3.6"

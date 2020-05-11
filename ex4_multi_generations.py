@@ -58,7 +58,7 @@ models1 = m.generate_model([attrs1, attrs2], rpk,
                            'com.esri.pyprt.PyEncoder', {})
 visualize_prt_results(models1)
 
-print('\Second generation:\n')
+print('\nSecond generation:\n')
 # if only one shapes attributes dictionary is given, it applies to all initial shapes.
 # in this case, equivalent to m.generate_model([attrs3, attrs3]).
 models2 = m.generate_model([attrs3])
