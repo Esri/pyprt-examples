@@ -16,7 +16,7 @@ This repo contains examples of PyPRT usage. You can find the source code in the 
 
 * [Installation](#installation)
 * [Examples](#examples)
-* [Running the examples](#running-the-examples)
+* [Running the examples](#running-the-examples-using-pipenv)
 * [Provided Rule Packages](#provided-rule-packages)
 * [License](#license)
 
