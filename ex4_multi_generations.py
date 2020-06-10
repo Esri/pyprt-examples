@@ -36,12 +36,9 @@ if not pyprt.is_prt_initialized():
 
 # Data
 rpk = asset_file('extrusion_rule.rpk')
-attrs1 = {'ruleFile': 'bin/extrusion_rule.cgb',
-          'startRule': 'Default$Footprint'}
-attrs2 = {'ruleFile': 'bin/extrusion_rule.cgb',
-          'startRule': 'Default$Footprint', 'minBuildingHeight': 30.0}
-attrs3 = {'ruleFile': 'bin/extrusion_rule.cgb',
-          'startRule': 'Default$Footprint', 'text': 'hello'}
+attrs1 = {}
+attrs2 = {'minBuildingHeight': 30.0}
+attrs3 = {'text': 'hello'}
 
 # Initial Shapes
 shape_geometry_1 = pyprt.InitialShape(

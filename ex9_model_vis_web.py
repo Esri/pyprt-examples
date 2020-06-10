@@ -102,8 +102,7 @@ class MainHandler(tornado.web.RequestHandler):
         mod_generator1 = pyprt.ModelGenerator(
             [pyprt.InitialShape(self.file_path)])
 
-        shape_attributes = {'ruleFile': 'bin/translateModel.cgb',
-                            'startRule': 'Default$Lot'}
+        shape_attributes = {}
 
         model = mod_generator1.generate_model([shape_attributes], RPK,
                                               'com.esri.pyprt.PyEncoder', {'emitReport': False})
