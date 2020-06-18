@@ -3,7 +3,7 @@ channels:
   - esri
   - defaults
   - anaconda
-  - esri-rd-zurich
+  - esri
 dependencies:
   - pip
   - python=3.6
