@@ -36,8 +36,7 @@ if not pyprt.is_prt_initialized():
 
 # Data
 rpk = asset_file('candler.rpk')
-attrs = {'ruleFile': 'bin/candler.cgb',
-         'startRule': 'Default$Footprint'}
+attrs = {}
 
 
 # Initial Shapes

@@ -35,8 +35,7 @@ if not pyprt.is_prt_initialized():
 
 # Data
 rpk = asset_file('extrusion_rule.rpk')
-attrs = {'ruleFile': 'bin/extrusion_rule.cgb',
-         'startRule': 'Default$Footprint'}
+attrs = {}
 
 # Initial Shape
 initial_shape = pyprt.InitialShape(

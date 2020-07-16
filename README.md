@@ -23,7 +23,7 @@ This repo contains examples of PyPRT usage. You can find the source code in the 
 
 ## Installation
 
-Simply run `pip install pyprt` in your desired Python environment or `conda install -c esri-rd-zurich pyprt` in a Conda environment. Then use `import pyprt` in your scripts.
+Simply run `pip install pyprt` in your desired Python environment or `conda install -c esri pyprt` in a Conda environment. Then use `import pyprt` in your scripts.
 
 
 ## Examples

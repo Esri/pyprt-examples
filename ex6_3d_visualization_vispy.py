@@ -93,8 +93,7 @@ if __name__ == '__main__':
     initial_geometry2 = pyprt.InitialShape(
         np.array([4, 0, 0,  4, 0, 2,  5, 0, 1,  5, 0, 0], dtype='f'))
     rpk = asset_file('extrusion_rule.rpk')
-    attrs = {'ruleFile': 'bin/extrusion_rule.cgb',
-             'startRule': 'Default$Footprint'}
+    attrs = {}
 
     mod = pyprt.ModelGenerator([initial_geometry, initial_geometry2])
     generated_mod = mod.generate_model(
