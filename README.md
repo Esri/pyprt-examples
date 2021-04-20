@@ -1,4 +1,4 @@
-# PyPRT - Python Bindings for CityEngine SDK
+# PyPRT Examples
 
 <img align="left" width="40" src="images/pyprt_logo.png">
 
