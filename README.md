@@ -21,6 +21,7 @@ This repo contains examples of PyPRT usage. You can find the source code in the 
 
 * Windows 10 64bit or Linux 64bit (RHEL7/CentOS7 compatible distro)
 * Python 3.6 64bit or later. Please note, we currently provide PyPRT builds for Python 3.6 and Python 3.8. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself. 
+* Packages (see `envs` directory): pyprt, arcgis, notebook, vispy, PyQT5, scipy, PyGEL3D, tornado
 
 ## Running the examples
 
