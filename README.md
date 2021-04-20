@@ -16,19 +16,36 @@ This repo contains examples of PyPRT usage. You can find the source code in the 
 
 ## Table of Contents
 
-* [Installation](#installation)
-* [Examples](#examples)
-* [Running the examples](#running-the-examples-using-pipenv)
+* [Requirements](#requirements)
+* [Running the examples](#running-the-examples)
+* [Available Examples](#available-examples)
 * [Provided Rule Packages](#provided-rule-packages)
 * [License](#license)
 
+## Requirements
 
-## Installation
+* Windows 10 64bit or Linux 64bit (RHEL7/CentOS7 compatible distro)
+* Python 3.6 64bit or later. Please note, we currently provide PyPRT builds for Python 3.6 and Python 3.8. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself. 
 
-Simply run `pip install pyprt` in your desired Python environment or `conda install -c esri pyprt` in a Conda environment. Then use `import pyprt` in your scripts.
+## Running the examples
 
+### Using Virtualenv
 
-## Examples
+1. Open a terminal with Python available and change to the root of this example repository.
+1. Create a virtualenv: `python3.8 -m venv .venv` (change Python version if necessary)
+1. Update to latest `pip`: `.venv/bin/python -m pip install --upgrade pip`
+1. Install required packages for these examples: `.venv/bin/python -m pip install -r envs/py38/requirements.txt`. This will fetch PyPRT from PyPI and all packages necessary to run the examples.
+1. Now run e.g. `.venv/bin/python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `.venv/bin/jupyter notebook` and open the desired example notebook in the opening browser page.
+
+### Using Anaconda
+
+1. Open the Anaconda prompt and change to the directory where you checked out this repository.
+1. Ensure you have a working Python 3.6 64bit installation. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself at the moment.
+1. Run `conda env create --prefix ./env --file environment.yml` to install PyPRT and all dependencies for the examples.
+1. Activate the Anaconda environment: `activate ./env`
+1. Now run e.g. `python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `jupyter notebook` and open the desired example notebook in the opening browser page.
+
+## Available Examples
 
 <table style="width:100%">
   <tr>
