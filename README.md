@@ -27,11 +27,20 @@ This repo contains examples of PyPRT usage. You can find the source code in the 
 
 ### Using Virtualenv
 
-1. Open a terminal with Python available and change to the root of this example repository.
-1. Create a virtualenv: `python3.8 -m venv .venv` (change Python version if necessary)
-1. Update to latest `pip`: `.venv/bin/python -m pip install --upgrade pip`
-1. Install required packages for these examples: `.venv/bin/python -m pip install -r envs/py38/requirements.txt`. This will fetch PyPRT from PyPI and all packages necessary to run the examples.
-1. Now run e.g. `.venv/bin/python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `.venv/bin/jupyter notebook` and open the desired example notebook in the opening browser page.
+1. Open a shell and change to the root of this example repository.
+1. Create a virtualenv: `python3.8 -m venv .venv` (replace `python3.8` with path to desired Python version if necessary)
+1. Update to latest `pip`:
+   * Linux: `.venv/bin/python -m pip install --upgrade pip`
+   * Windows: `.venv\Scripts\python -m pip install --upgrade pip`
+1. Install required packages for the example - this will fetch PyPRT from PyPI and all packages necessary to run the examples (replace `py38` with the used Python version):
+   * Linux: `.venv/bin/python -m pip install -r envs/py38/requirements.txt`
+   * Windows: `.venv\Scripts\python -m pip install -r envs\py38\requirements.txt`
+1. To run an example script, use the following syntax: 
+   * Linux: `.venv/bin/python ex1_python_encoder.py`
+   * Windows: `.venv\Scripts\python ex1_python_encoder.py`
+1. For the examples based on Jupyter Notebooks, use the following syntax and open the desired example notebook in the opening browser page:
+   * Linux: `.venv/bin/jupyter notebook` 
+   * Windows: `.venv\Scripts\jupyter notebook` 
 
 ### Using Anaconda
 
