@@ -25,24 +25,26 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 
 ## Running the examples
 
-### Using Virtualenv
+PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`. To run the examples a few more packages are required, so please read on! :-)
+
+### Using virtualenv and pip
 
 1. Open a shell and change to the root of this example repository.
-1. Create a virtualenv: `python3.8 -m venv .venv` (replace `python3.8` with path to desired Python version if necessary)
-1. Update to latest `pip`:
-   * Linux: `.venv/bin/python -m pip install --upgrade pip`
-   * Windows: `.venv\Scripts\python -m pip install --upgrade pip`
-1. Install required packages for the example - this will fetch PyPRT from PyPI and all packages necessary to run the examples (replace `py38` with the used Python version):
-   * Linux: `.venv/bin/python -m pip install -r envs/py38/requirements.txt`
-   * Windows: `.venv\Scripts\python -m pip install -r envs\py38\requirements.txt`
-1. To run an example script, use the following syntax: 
-   * Linux: `.venv/bin/python ex1_python_encoder.py`
-   * Windows: `.venv\Scripts\python ex1_python_encoder.py`
-1. For the examples based on Jupyter Notebooks, use the following syntax and open the desired example notebook in the opening browser page:
-   * Linux: `.venv/bin/jupyter notebook` 
-   * Windows: `.venv\Scripts\jupyter notebook` 
+1. First time setup:
+   1. Create a virtualenv: `python3.8 -m venv .venv` (replace `python3.8` with path to desired Python version if necessary)
+   1. Update to latest `pip`:
+      * Linux: `.venv/bin/python -m pip install --upgrade pip`
+      * Windows: `.venv\Scripts\python -m pip install --upgrade pip`
+   1. Install required packages for the example - this will fetch PyPRT from PyPI and all packages necessary to run the examples (replace `py38` with the used Python version):
+      * Linux: `.venv/bin/python -m pip install -r envs/py38/requirements.txt`
+      * Windows: `.venv\Scripts\python -m pip install -r envs\py38\requirements.txt`
+1. Activate the environment:
+   * Linux: `.venv/bin/activate`
+   * Windows: `.venv\Scripts\activate.bat`
+1. Now run the examples, e.g. `python ex1_python_encoder.py` 
+1. For the examples based on Jupyter Notebooks, first start jupyter with `jupyter notebooks` and then open the desired example notebook in the opened browser window.
 
-### Using Anaconda
+### Alternative: using Anaconda
 
 1. Open the Anaconda prompt and change to the directory where you checked out this repository.
 1. Ensure you have a working Python 3.6 64bit installation. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself at the moment.
