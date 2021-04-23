@@ -1,6 +1,6 @@
 # PyPRT Examples
 
-<img alt="PyPRT Icon" width="40px" src="images/pyprt_logo.png" />
+<img align="left" alt="PyPRT Icon" width="40px" src="images/pyprt_logo.png" />
 
 PyPRT is a Python binding for PRT (CityEngine Procedural Runtime). It enables the execution of CityEngine CGA rules within Python. PyPRT allows to easily and efficiently generate 3D geometries.
 
