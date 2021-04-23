@@ -2,9 +2,9 @@
 
 <img align="left" alt="PyPRT Icon" width="40px" src="images/pyprt_logo.png" />
 
-PyPRT is a Python binding for PRT (CityEngine Procedural Runtime). It enables the execution of CityEngine CGA rules within Python. PyPRT allows to easily and efficiently generate 3D geometries.
+PyPRT provides Python bindings for PRT (Procedural RunTime) of CityEngine. This enables the execution of CityEngine CGA rules within Python. PyPRT allows to easily and efficiently generate 3D geometries, process them as Python data structures and export them to multiple 3D file formats.
 
-This repo contains examples of PyPRT usage. You can find the source code in the main [PyPRT](https://github.com/Esri/pyprt) repository. More detailed information is available there.
+This repo contains examples of PyPRT usage. You can find installation instructions and the source code in the main [PyPRT](https://github.com/Esri/pyprt) repository.
 
 <p align="center"><img src="images/building.png" alt="green building" /></p>
 <p align="center"><img src="images/generated_trees.png" alt="city with trees" /></p>
