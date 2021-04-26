@@ -91,7 +91,7 @@ This repo contains examples of PyPRT usage. You can find the source code in the 
   <tr>
     <td>ex7_building_modeling_optimization.ipynb</td>
     <td>This example is about optimizing the attributes of a building generated on a parcel considering the green area of the building. SciPy is used as the optimization library.</td>
-    <td><a href="https://pypi.org/project/PyGEL3D">PyGEL3D</a> is used as a visualization tool in this example. Unfortunately the pre-built package of PyGEL3D on PyPI is broken for Linux (you can <a href="https://github.com/janba/GEL">try</a> to build it locally).</td>
+    <td><a href="https://pypi.org/project/PyGEL3D">PyGEL3D</a> is used as a visualization tool in this example. There is currently a known issue that the display is using the wrong up axis.</td>
   </tr>
   <tr>
     <td>ex8_3d_gis_content_generation.ipynb</td>
