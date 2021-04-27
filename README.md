@@ -42,7 +42,7 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
    * Linux: `source .venv/bin/activate`
    * Windows: `.venv\Scripts\activate.bat`
 1. Now run the examples, e.g. `python ex1_python_encoder.py` 
-1. For the examples based on Jupyter Notebooks, first start jupyter with `jupyter notebooks` and then open the desired example notebook in the opened browser window.
+1. For the examples based on Jupyter Notebooks, first start jupyter with `jupyter notebook` and then open the desired example notebook in the opened browser window.
 
 ### Alternative: using Anaconda
 
