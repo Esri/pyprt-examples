@@ -1,6 +1,7 @@
 name: pyprt-examples
 channels:
   - esri
+  - conda-forge
   - defaults
   - anaconda
 dependencies:
