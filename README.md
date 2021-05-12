@@ -20,7 +20,7 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 ## Requirements
 
 * Windows 10 64bit or Linux 64bit (RHEL7/CentOS7 compatible distro)
-* Python 3.6 64bit or later. Please note, we currently provide PyPRT builds for Python 3.6 and Python 3.8. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself. 
+* Python 3.6 64bit or later. Please note, we currently provide PyPRT builds for Python 3.6, 3.7 and 3.8. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself. 
 * Packages (see `envs` directory): pyprt, arcgis, notebook, vispy, PyQT5, scipy, PyGEL3D, tornado
 
 ## Running the examples
@@ -47,7 +47,7 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
 ### Alternative: using Anaconda
 
 1. Open the Anaconda prompt and change to the directory where you checked out this repository.
-1. Ensure you have a working Python 3.6 64bit installation. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself at the moment.
+1. Ensure you have a working Python 3.6, 3.7 or 3.8 64bit installation. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself at the moment.
 1. Run `conda env create --prefix ./env --file environment.yml` to install PyPRT and all dependencies for the examples.
 1. Activate the Anaconda environment: `activate ./env`
 1. Now run e.g. `python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `jupyter notebook` and open the desired example notebook in the opening browser page.
