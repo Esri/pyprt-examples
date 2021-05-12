@@ -7,8 +7,7 @@ channels:
 dependencies:
   - pip
   - python=3.6
-  - pyprt
-  - arcgis=1.7.1
+  - pyprt  
   - arcgis=1.8.2
   - notebook
   - scipy
