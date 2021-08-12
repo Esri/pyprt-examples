@@ -8,7 +8,7 @@ dependencies:
   - pip
   - python=3.8
   - pyprt  
-  - arcgis=1.8.2
+  - arcgis=1.9.0
   - notebook
   - scipy
   - vispy

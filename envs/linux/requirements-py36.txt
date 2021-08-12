@@ -1,5 +1,5 @@
 anyio==2.2.0
-arcgis==1.8.2
+arcgis==1.9.0
 argon2-cffi==20.1.0
 async-generator==1.10
 attrs==21.2.0
@@ -90,7 +90,7 @@ testpath==0.4.4
 tornado==6.1
 traitlets==4.3.3
 typing-extensions==3.10.0.0
-urllib3==1.26.4
+urllib3==1.26.5
 vispy==0.6.6
 wcwidth==0.2.5
 webencodings==0.5.1
