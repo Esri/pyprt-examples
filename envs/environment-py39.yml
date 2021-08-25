@@ -6,9 +6,8 @@ channels:
   - anaconda
 dependencies:
   - pip
-  - python=3.8
+  - python=3.9
   - pyprt  
-  - arcgis=1.9.0
   - notebook
   - scipy
   - vispy

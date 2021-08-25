@@ -15,17 +15,19 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 * [Running the examples](#running-the-examples)
 * [Available Examples](#available-examples)
 * [Provided Rule Packages](#provided-rule-packages)
-* [License](#license)
+* [Licensing Information](#licensing-information)
 
 ## Requirements
 
 * Windows 10 64bit or Linux 64bit (RHEL7/CentOS7 compatible distro)
-* Python 3.6 64bit or later. Please note, we currently provide PyPRT builds for Python 3.6 and 3.8 (as well as 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself. 
-* Packages (see `envs` directory): pyprt, arcgis 1.8.2, notebook, vispy, PyQT5, scipy, PyGEL3D, tornado
+* Python 3.6 64bit or later. Please note, we currently provide PyPRT builds for Python 3.6, 3.8 and 3.9 (as well as 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
+* Packages (see `envs` directory): pyprt, arcgis 1.9.0, notebook, vispy, PyQT5, scipy, PyGEL3D, tornado
 
 ## Running the examples
 
 PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`. To run the examples a few more packages are required, so please read on! :-)
+
+(*) A note regarding Python 3.9 and Conda: The arcgis package for Python 3.9 is not yet available in Conda, therefore the examples 8 and 9 are not working with Python 3.9 in a Conda environment.
 
 ### Using virtualenv and pip
 
@@ -33,14 +35,13 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
 1. First time setup:
    1. Create a virtualenv: `python3.8 -m venv .venv` (replace `python3.8` with path to desired Python version if necessary)
    1. Update to latest `pip`:
-      * Linux/macOS: `.venv/bin/python -m pip install --upgrade pip`
+      * Linux: `.venv/bin/python -m pip install --upgrade pip`
       * Windows: `.venv\Scripts\python -m pip install --upgrade pip`
    1. Install required packages for the example - this will fetch PyPRT from PyPI and all packages necessary to run the examples (replace `py38` with the used Python version):
       * Linux: `.venv/bin/python -m pip install -r envs/linux/requirements-py38.txt`
       * Windows: `.venv\Scripts\python -m pip install -r envs\windows\requirements-py38.txt`
-      * macOS: `.venv/bin/python -m pip install -r envs/macos/requirements-py38.txt`
 1. Activate the environment:
-   * Linux/macOS: `source .venv/bin/activate`
+   * Linux: `source .venv/bin/activate`
    * Windows: `.venv\Scripts\activate.bat`
 1. Now run the examples, e.g. `python ex1_python_encoder.py` 
 1. For the examples based on Jupyter Notebooks, first start jupyter with `jupyter notebook` and then open the desired example notebook in the opened browser window.
@@ -225,11 +226,15 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
   </tr>
 </table>
 
-## License
+## Licensing Information
 
-PyPRT is under the same license as the included [CityEngine SDK](https://github.com/Esri/esri-cityengine-sdk#licensing).
+PyPRT is free for personal, educational, and non-commercial use. Commercial use requires at least one commercial license of the latest CityEngine version installed in the organization. Redistribution or web service offerings are not allowed unless expressly permitted.
 
-An exception is the PyPRT source code (without CityEngine SDK, binaries, or object code), which is licensed under the Apache License, Version 2.0 (the “License”); you may not use this work except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+PyPRT is under the same license as the included [CityEngine SDK](https://github.com/esri/cityengine-sdk#licensing). An exception is the PyPRT source code (without CityEngine SDK, binaries, or object code), which is licensed under the Apache License, Version 2.0 (the “License”); you may not use this work except in compliance with the License. You may obtain a copy of the License at https://www.apache.org/licenses/LICENSE-2.0.
+
+All content in the "Examples" directory/section is licensed under the APACHE 2.0 license as well.
+
+For questions or enquiries, please contact the Esri CityEngine team (cityengine-info@esri.com).
 
 [Back to top](#table-of-contents)
 
