@@ -11,6 +11,7 @@ dependencies:
   - notebook
   - scipy
   - vispy
+  - ipywidgets
   - pip:
     - pygel3d
     - pyqt5
