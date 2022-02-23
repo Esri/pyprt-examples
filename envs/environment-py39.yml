@@ -7,11 +7,12 @@ channels:
 dependencies:
   - pip
   - python=3.9
-  - pyprt  
-  - notebook
+  - pyprt
+  - arcgis=2.0.0
   - scipy
   - vispy
   - ipywidgets
   - pip:
     - pygel3d
     - pyqt5
+    - notebook
