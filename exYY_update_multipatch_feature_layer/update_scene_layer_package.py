@@ -54,20 +54,11 @@ def main():
     if len(existing_scene_layers) == 0:
         new_scene_layer_item.update(item_properties={'title': TARGET_SCENE_LAYER_NAME})
     else:
-        delete_suffix = ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(5))
-        replaced_scene_layer_name = TARGET_SCENE_LAYER_NAME + '_delete_' + delete_suffix
-
         scene_layer_item = existing_scene_layers[0]
         replacement_successful = gis.content.replace_service(scene_layer_item, new_scene_layer_item,
-                                                             replaced_service_name=replaced_scene_layer_name,
                                                              replace_metadata=True)
         print(f"   Replacement status: {replacement_successful}")
-    print(f"   ... done.")
-
-    print("Cleaning up replaced scene layer/service ...")
-    max_tries = 5
-    if not delete_item_with_retrying(gis, replaced_scene_layer_name, "Scene Service", max_tries):
-        print(f"Failed to cleanup replaced service {replaced_scene_layer_name} after {max_tries} attempts.")
+        new_scene_layer_item.delete()
     print(f"   ... done.")
 
     print("Please allow a few minutes for web scenes using the updated scene layer to update.")
@@ -129,19 +120,6 @@ def find_exactly(gis, item_title, item_type):
     results = gis.content.search(query=f'title:"{item_title}" AND type:"{item_type}"')
     results = list(filter(lambda item: item.title == item_title, results))
     return results
-
-
-def delete_item_with_retrying(gis, item_name, item_type, max_tries):
-    # the replaced item is not immediately findable... let's wait for it
-    tries = 0
-    while tries < max_tries:
-        replaced_scene_layer_item = find_exactly(gis, item_name, item_type)
-        if len(replaced_scene_layer_item) == 1:
-            replaced_scene_layer_item[0].delete()
-            break
-        time.sleep(1)
-        tries += 1
-    return tries < 5
 
 
 if __name__ == '__main__':
