@@ -1,7 +1,6 @@
 import os.path
 import string
 import random
-import time
 import keyring
 import tempfile
 from pathlib import Path
