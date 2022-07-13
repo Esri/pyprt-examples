@@ -15,7 +15,8 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 
 USER_NAME = 'simon_zurich'
 SOURCE_FEATURE_LAYER_ID = 'b5677b032c224d0a87b7034db72b4b74'
-TARGET_SCENE_LAYER_NAME = 'PyPRT_Scene_Layer_Update_Test'
+TARGET_SCENE_LAYER_ID = 'bbc15eda30b84754a22a043bb5ae541a'
+TARGET_SCENE_LAYER_DEFAULT_NAME = 'PyPRT_Scene_Layer'
 RULE_PACKAGE_ITEM_ID = '9b5828f52203403a85556ebd14a617f7'
 
 
@@ -28,9 +29,14 @@ def main():
     source_features = fetch_source_features(gis, SOURCE_FEATURE_LAYER_ID)
     print(f"   ... done. Got {len(source_features)} features.")
 
+    print('Fetching target scene layer item...')
+    target_scene_layer_item = gis.content.get(TARGET_SCENE_LAYER_ID)
+    target_scene_layer_name = target_scene_layer_item.title if target_scene_layer_item else TARGET_SCENE_LAYER_DEFAULT_NAME
+    print(f'   ... done: {target_scene_layer_name}')
+
     with tempfile.TemporaryDirectory() as temp_dir:
         random_suffix = ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(5))
-        new_slpk_name = TARGET_SCENE_LAYER_NAME + '_' + random_suffix
+        new_slpk_name = target_scene_layer_name + '_' + random_suffix
 
         print(f"Generating new SLPK in {temp_dir}...")
         scene_layer_package = generate_scene_layer_package(gis, new_slpk_name, source_features, temp_dir)
@@ -42,24 +48,21 @@ def main():
 
     print("Publish new scene layer from new SLPK...")
     new_scene_layer_item = new_slpk_item.publish()
-    print("   ... done.")
+    print(f"   ... done, scene layer item id = {new_scene_layer_item.id}")
 
     print("Removing new SLPK again...")
     new_slpk_item.delete()
     print("   ... done.")
 
-    print(f"Replacing service for item '{TARGET_SCENE_LAYER_NAME}' ...")
-    existing_scene_layers = find_exactly(gis, TARGET_SCENE_LAYER_NAME, "Scene Service")
-    assert 0 <= len(existing_scene_layers) <= 1
-    if len(existing_scene_layers) == 0:
-        new_scene_layer_item.update(item_properties={'title': TARGET_SCENE_LAYER_NAME})
+    if not target_scene_layer_item:
+        new_scene_layer_item.update(item_properties={'title': target_scene_layer_name})
     else:
-        scene_layer_item = existing_scene_layers[0]
-        replacement_successful = gis.content.replace_service(scene_layer_item, new_scene_layer_item,
+        print(f"Replacing service for item '{target_scene_layer_name}' ...")
+        replacement_successful = gis.content.replace_service(target_scene_layer_item, new_scene_layer_item,
                                                              replace_metadata=True)
         print(f"   Replacement status: {replacement_successful}")
         new_scene_layer_item.delete()
-    print(f"   ... done.")
+        print(f"   ... done.")
 
     print("Please allow a few minutes for web scenes using the updated scene layer to update.")
 
