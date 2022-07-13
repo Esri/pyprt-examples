@@ -16,7 +16,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 USER_NAME = 'simon_zurich'
 SOURCE_FEATURE_LAYER_ID = 'b5677b032c224d0a87b7034db72b4b74'
 TARGET_SCENE_LAYER_NAME = 'PyPRT_Scene_Layer_Update_Test'
-RPK_NAME = 'extrude.rpk'
+RULE_PACKAGE_ITEM_ID = '9b5828f52203403a85556ebd14a617f7'
 
 
 def main():
@@ -33,7 +33,7 @@ def main():
         new_slpk_name = TARGET_SCENE_LAYER_NAME + '_' + random_suffix
 
         print(f"Generating new SLPK in {temp_dir}...")
-        scene_layer_package = generate_scene_layer_package(new_slpk_name, source_features, temp_dir)
+        scene_layer_package = generate_scene_layer_package(gis, new_slpk_name, source_features, temp_dir)
         print(f"   ... done: {scene_layer_package}")
 
         print(f"Uploading new SLPK ...")
@@ -71,11 +71,12 @@ def fetch_source_features(gis, source_item_id):
     return source_features
 
 
-def generate_scene_layer_package(name, source_features, output_dir):
+def generate_scene_layer_package(gis, name, source_features, output_dir):
     pyprt_slpk_encoder = 'com.esri.prt.codecs.I3SEncoder'
 
+    rule_package_item = gis.content.get(RULE_PACKAGE_ITEM_ID)
+    rpk = rule_package_item.download()
     attrs = [{'h': 20.0}]  # EPSG:2272 is in feet!
-    rpk = SCRIPT_DIR.joinpath(RPK_NAME)
 
     pyprt_slpk_options = {
         'sceneType': 'Local',  # cannot use Global as PyPRT does not have reprojection capabilities
@@ -98,7 +99,7 @@ def generate_scene_layer_package(name, source_features, output_dir):
 
     pyprt_initial_shapes = arcgis_to_pyprt(source_features)
     pyprt_model_generator = pyprt.ModelGenerator(pyprt_initial_shapes)
-    pyprt_model_generator.generate_model(attrs, str(rpk), pyprt_slpk_encoder, pyprt_slpk_options)
+    pyprt_model_generator.generate_model(attrs, rpk, pyprt_slpk_encoder, pyprt_slpk_options)
     pyprt_generated_slpk = os.path.join(output_dir, f'{name}.slpk')
     assert os.path.exists(pyprt_generated_slpk)
 
