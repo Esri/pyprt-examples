@@ -1,3 +1,5 @@
+import sys
+import getpass
 import os.path
 import string
 import random
@@ -12,7 +14,6 @@ from pyprt.pyprt_arcgis import arcgis_to_pyprt
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 
-USER_NAME = 'simon_zurich'
 SOURCE_FEATURE_LAYER_ID = 'b5677b032c224d0a87b7034db72b4b74'
 TARGET_SCENE_LAYER_ID = 'bbc15eda30b84754a22a043bb5ae541a'
 TARGET_SCENE_LAYER_DEFAULT_NAME = 'PyPRT_Scene_Layer'
@@ -20,9 +21,7 @@ RULE_PACKAGE_ITEM_ID = '9b5828f52203403a85556ebd14a617f7'
 
 
 def main():
-    # use keyring.set_password(...) in a local python session to supply your password
-    password = keyring.get_password("zurich.maps.arcgis.com", USER_NAME)
-    gis = GIS(username=USER_NAME, password=password, verify_cert=False)
+    gis = get_gis()
 
     print(f"Fetching input features from item {SOURCE_FEATURE_LAYER_ID}... ")
     source_features = fetch_source_features(gis, SOURCE_FEATURE_LAYER_ID)
@@ -108,6 +107,18 @@ def generate_scene_layer_package(gis, name, source_features, output_dir):
     pyprt.shutdown_prt()
 
     return pyprt_generated_slpk
+
+
+def get_gis():
+    arcgis_credential = keyring.get_credential(service_name="arcgis.com", username=None)
+    if arcgis_credential:
+        user_name = arcgis_credential.username
+        password = arcgis_credential.password
+    else:
+        user_name = input('arcgis username:')
+        password = getpass.getpass(prompt='arcgis password:')
+    gis = GIS(username=user_name, password=password, verify_cert=False)
+    return gis
 
 
 if __name__ == '__main__':
