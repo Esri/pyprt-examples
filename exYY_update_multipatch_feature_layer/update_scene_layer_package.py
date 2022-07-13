@@ -111,20 +111,5 @@ def generate_scene_layer_package(gis, name, source_features, output_dir):
     return pyprt_generated_slpk
 
 
-def delete_items_by_name(gis, name):
-    search_results = gis.content.search(query=f"title:{name}")
-    exact_results = list(filter(lambda item: item.title == name, search_results))
-    if len(exact_results) > 0:
-        for i in exact_results:
-            i.delete()
-    return len(exact_results)
-
-
-def find_exactly(gis, item_title, item_type):
-    results = gis.content.search(query=f'title:"{item_title}" AND type:"{item_type}"')
-    results = list(filter(lambda item: item.title == item_title, results))
-    return results
-
-
 if __name__ == '__main__':
     main()
