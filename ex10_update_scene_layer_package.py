@@ -14,10 +14,13 @@ from pyprt.pyprt_arcgis import arcgis_to_pyprt
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 
-SOURCE_FEATURE_LAYER_ID = 'b5677b032c224d0a87b7034db72b4b74'
-TARGET_SCENE_LAYER_ID = 'bbc15eda30b84754a22a043bb5ae541a'
-TARGET_SCENE_LAYER_DEFAULT_NAME = 'PyPRT_Scene_Layer'
-RULE_PACKAGE_ITEM_ID = '9b5828f52203403a85556ebd14a617f7'
+SOURCE_FEATURE_LAYER_ID = 'dfae9883bc3548dcbd29758ff8ea9234'  # Switzerland Kantone Boundaries 2021
+SOURCE_FEATURE_LAYER_WKID = '3857'
+TARGET_SCENE_LAYER_ID = '0'
+TARGET_SCENE_LAYER_DEFAULT_NAME = 'PyPRT_Ex10_Scene_Layer'
+RULE_PACKAGE_ITEM_ID = '5ea3e57d47224c21b2678069cd325f84'
+
+POPULATION_DENSITY_MODE = 'linear'  # or 'logarithmic'
 
 
 def main():
@@ -67,7 +70,9 @@ def main():
 
 def fetch_source_features(gis, source_item_id):
     source_feature_layer_collection = gis.content.get(source_item_id)
-    source_feature_layer = source_feature_layer_collection.layers[0]
+    assert len(source_feature_layer_collection.layers) == 9
+    source_feature_layer = source_feature_layer_collection.layers[2]
+    assert source_feature_layer.properties.name == 'CHE_Kantone'
     source_features = source_feature_layer.query(return_z=True)
     return source_features
 
@@ -77,12 +82,19 @@ def generate_scene_layer_package(gis, name, source_features, output_dir):
 
     rule_package_item = gis.content.get(RULE_PACKAGE_ITEM_ID)
     rpk = rule_package_item.download()
-    attrs = [{'h': 20.0}]  # EPSG:2272 is in feet!
+
+    attrs = []
+    for source_feature in source_features:
+        attrs.append({
+            'populationDensityMode': POPULATION_DENSITY_MODE,
+            'population': float(source_feature.get_value('TOTPOP_CY')),
+            'area': float(source_feature.get_value('AREA'))
+        })
 
     pyprt_slpk_options = {
         'sceneType': 'Local',  # cannot use Global as PyPRT does not have reprojection capabilities
         'baseName': name,
-        'sceneWkid': '2272',  # must match the input feature layer and the target scene layer
+        'sceneWkid': SOURCE_FEATURE_LAYER_WKID,
         'layerTextureEncoding': ['2'],
         'layerEnabled': [True],
         'layerUID': ['1'],
