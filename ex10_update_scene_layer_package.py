@@ -5,12 +5,14 @@ import string
 import random
 import keyring
 import tempfile
+import shapely
 from pathlib import Path
+import numpy as np
 
 from arcgis.gis import GIS
+from arcgis.geometry import Geometry
 
 import pyprt
-from pyprt.pyprt_arcgis import arcgis_to_pyprt
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 
@@ -132,6 +134,106 @@ def get_gis():
     gis = GIS(username=user_name, password=password, verify_cert=False)
     return gis
 
+
+# --- code copy from pyprt_arcgis start ---
+
+def add_dimension(array_coord_2d):
+    array_coord_3d = np.insert(array_coord_2d, 1, 0, axis=1)
+    return np.reshape(array_coord_3d, (1, array_coord_3d.shape[0] * array_coord_3d.shape[1]))
+
+
+def swap_yz_dimensions(array_coord):
+    coord_swap_dim = array_coord.copy()
+    temp = np.copy(array_coord[:, 1])
+    coord_swap_dim[:, 1] = coord_swap_dim[:, 2]
+    coord_swap_dim[:, 2] = temp
+    return np.reshape(coord_swap_dim, (1, coord_swap_dim.shape[0] * coord_swap_dim.shape[1]))
+
+
+def holes_conversion(holes_ind_list):
+    holes_dict = {}
+    holes_list = []
+    if len(holes_ind_list) > 0:
+        for h_idx in holes_ind_list:
+            f_idx = h_idx
+            while f_idx > 0:
+                f_idx -= 1
+                if not (f_idx in holes_ind_list):
+                    if not (f_idx in holes_dict):
+                        holes_dict[f_idx] = [h_idx]
+                    else:
+                        holes_dict[f_idx].append(h_idx)
+                    break
+
+        for key, value in holes_dict.items():
+            face_holes = [key]
+            face_holes.extend(value)
+            holes_list.append(face_holes)
+    return holes_list
+
+
+def arcgis_to_pyprt(feature_set):
+    """arcgis_to_pyprt(feature_set) -> List[InitialShape]
+    This function allows converting an ArcGIS FeatureSet into a list of PyPRT InitialShape instances.
+    You then typically call the ModelGenerator constructor with the return value if this function as parameter.
+
+    Parameters:
+        feature_set: FeatureSet
+
+    Returns:
+        List[InitialShape]
+
+    """
+    initial_geometries = []
+    for feature in feature_set.features:
+        try:
+            geo = Geometry(feature.geometry)
+            if geo.type == 'Polygon' and (not geo.is_empty):
+                pts_cnt = 0
+                vert_coord_list = []
+                face_count_list = []
+                holes_ind_list = []
+                coord_list = geo.coordinates()
+
+                for face_idx, coord_part in enumerate(coord_list):
+                    coord_remove_last = coord_part[:-1]
+                    coord_inverse = np.flip(coord_remove_last, axis=0)
+                    coord_inverse[:, 1] *= -1
+
+                    if len(coord_part[0]) == 2:
+                        coord_fin = add_dimension(coord_inverse)
+                    elif len(coord_part[0]) == 3:
+                        coord_fin = swap_yz_dimensions(coord_inverse)
+                    else:
+                        print("Only 2D or 3D points are supported.")
+
+                    vert_coord_list.extend(coord_fin[0])
+                    nb_pts = len(coord_fin[0]) / 3
+                    pts_cnt += nb_pts
+                    face_count_list.append(int(nb_pts))
+
+                # use Shapely to detect interior rings (holes)
+                shapely_geo = geo.as_shapely
+                shapely_face_index = 0
+                for shapely_part in shapely_geo.geoms:
+                    shapely_face_index += 1
+                    for shapely_interior in shapely_part.interiors:
+                        holes_ind_list.append(shapely_face_index)
+                        shapely_face_index += 1
+
+                face_indices_list = list(range(0, sum(face_count_list)))
+                holes_list = holes_conversion(holes_ind_list)
+
+                initial_geometry = pyprt.InitialShape(vert_coord_list, face_indices_list, face_count_list, holes_list)
+                initial_geometries.append(initial_geometry)
+        except:
+            print("This feature is not valid: ")
+            print(feature)
+            print()
+    return initial_geometries
+
+
+# --- code copy from pyprt_arcgis end ---
 
 if __name__ == '__main__':
     main()
