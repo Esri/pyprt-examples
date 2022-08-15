@@ -10,6 +10,7 @@ dependencies:
   - pyprt
   - arcgis=2.0.0
   - scipy
+  - shapely=1.8.2
   - vispy
   - ipywidgets
   - pip:
