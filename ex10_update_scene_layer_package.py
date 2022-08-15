@@ -13,6 +13,10 @@
 # limitations under the License.
 # A copy of the license is available in the repository's LICENSE file.
 
+# This example demonstrates how an existing Scene Layer can be updated without having to touch any related Web Scenes.
+# We use PyPRT to create a Scene Layer with a 3d visualization of the Swiss population density. We then
+# recreate the Scene Layer with different visualization properties and show how the Web Scene updates automatically.
+
 # Example Steps:
 # 1. At first run, the script will create a new Scene Layer called 'PyPRT_Ex10_Scene_Layer_<random suffix>'
 # 2. On ArcGIS Online, create a Web Scene with this new Scene Layer
