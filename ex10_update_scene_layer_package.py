@@ -160,7 +160,7 @@ def make_name_unique(name):
     return f'{name}_{random_suffix}'
 
 
-# --- code copy from pyprt_arcgis start ---
+# --- modified code copy from pyprt_arcgis start ---
 
 def add_dimension(array_coord_2d):
     array_coord_3d = np.insert(array_coord_2d, 1, 0, axis=1)
@@ -175,26 +175,34 @@ def swap_yz_dimensions(array_coord):
     return np.reshape(coord_swap_dim, (1, coord_swap_dim.shape[0] * coord_swap_dim.shape[1]))
 
 
-def holes_conversion(holes_ind_list):
-    holes_dict = {}
-    holes_list = []
-    if len(holes_ind_list) > 0:
-        for h_idx in holes_ind_list:
-            f_idx = h_idx
-            while f_idx > 0:
-                f_idx -= 1
-                if not (f_idx in holes_ind_list):
-                    if not (f_idx in holes_dict):
-                        holes_dict[f_idx] = [h_idx]
-                    else:
-                        holes_dict[f_idx].append(h_idx)
-                    break
+def get_hole_info(geo):
+    # use Shapely to detect interior rings (holes)
+    # doing the ccw check is a workaround as sometimes the exterior is actually a hole
+    # we assume that interior rings follow "their" exterior ring
 
-        for key, value in holes_dict.items():
-            face_holes = [key]
-            face_holes.extend(value)
-            holes_list.append(face_holes)
-    return holes_list
+    shapely_geo = geo.as_shapely
+
+    shapely_rings = []
+    for shapely_part in shapely_geo.geoms:
+        shapely_rings.append(shapely_part.exterior)
+        for shapely_interior in shapely_part.interiors:
+            shapely_rings.append(shapely_interior)
+
+    holes = []
+    hole = []
+    shapely_face_index = 0
+    for shapely_ring in shapely_rings:
+        if not shapely_ring.is_ccw:  # exterior
+            if len(hole) > 0:
+                holes.append(hole)
+            hole = [shapely_face_index]
+        else:  # interior
+            hole.append(shapely_face_index)
+        shapely_face_index += 1
+    if len(hole) > 0:
+        holes.append(hole)
+
+    return holes
 
 
 def arcgis_to_pyprt(feature_set):
@@ -217,7 +225,6 @@ def arcgis_to_pyprt(feature_set):
                 pts_cnt = 0
                 vert_coord_list = []
                 face_count_list = []
-                holes_ind_list = []
                 coord_list = geo.coordinates()
 
                 for face_idx, coord_part in enumerate(coord_list):
@@ -237,19 +244,10 @@ def arcgis_to_pyprt(feature_set):
                     pts_cnt += nb_pts
                     face_count_list.append(int(nb_pts))
 
-                # use Shapely to detect interior rings (holes)
-                shapely_geo = geo.as_shapely
-                shapely_face_index = 0
-                for shapely_part in shapely_geo.geoms:
-                    shapely_face_index += 1
-                    for shapely_interior in shapely_part.interiors:
-                        holes_ind_list.append(shapely_face_index)
-                        shapely_face_index += 1
-
                 face_indices_list = list(range(0, sum(face_count_list)))
-                holes_list = holes_conversion(holes_ind_list)
+                holes = get_hole_info(geo)
 
-                initial_geometry = pyprt.InitialShape(vert_coord_list, face_indices_list, face_count_list, holes_list)
+                initial_geometry = pyprt.InitialShape(vert_coord_list, face_indices_list, face_count_list, holes)
                 initial_geometries.append(initial_geometry)
         except:
             print("This feature is not valid: ")
