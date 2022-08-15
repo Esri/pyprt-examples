@@ -14,20 +14,18 @@
 # A copy of the license is available in the repository's LICENSE file.
 
 # Example Steps:
-# 1. At first run, the script will create a new Scene Layer called 'PyPRT_Ex10_Scene_Layer'
-# 2. Create a Web Scene with this new layer
-# 3. Retrieve the item ID of the above layer and set it for 'TARGET_SCENE_LAYER_ID' below
+# 1. At first run, the script will create a new Scene Layer called 'PyPRT_Ex10_Scene_Layer_<random suffix>'
+# 2. On ArcGIS Online, create a Web Scene with this new Scene Layer
+# 3. Retrieve the item ID of the new Scene Layer (see console output) and set it for 'TARGET_SCENE_LAYER_ID' below
 # 4. Now change the POPULATION_DENSITY_MODE to 'logarithmic' and re-run the script
 # 5. After a while, the Web Scene will update automatically.
 
-import sys
 import getpass
 import os.path
 import string
 import random
 import keyring
 import tempfile
-import shapely
 from pathlib import Path
 import numpy as np
 
@@ -56,19 +54,19 @@ def main():
 
     print('Fetching target scene layer item...')
     target_scene_layer_item = gis.content.get(TARGET_SCENE_LAYER_ID)
-    target_scene_layer_name = target_scene_layer_item.title if target_scene_layer_item else TARGET_SCENE_LAYER_DEFAULT_NAME
+    target_scene_layer_name = target_scene_layer_item.title if target_scene_layer_item else make_name_unique(
+        TARGET_SCENE_LAYER_DEFAULT_NAME)
     print(f'   ... done: {target_scene_layer_name}')
 
     with tempfile.TemporaryDirectory() as temp_dir:
-        random_suffix = ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(5))
-        new_slpk_name = target_scene_layer_name + '_' + random_suffix
+        slpk_name = make_name_unique(target_scene_layer_name)
 
         print(f"Generating new SLPK in {temp_dir}...")
-        scene_layer_package = generate_scene_layer_package(gis, new_slpk_name, source_features, temp_dir)
+        scene_layer_package = generate_scene_layer_package(gis, slpk_name, source_features, temp_dir)
         print(f"   ... done: {scene_layer_package}")
 
         print(f"Uploading new SLPK ...")
-        new_slpk_item = gis.content.add(data=scene_layer_package, item_properties={'title': new_slpk_name})
+        new_slpk_item = gis.content.add(data=scene_layer_package, item_properties={'title': slpk_name})
         print(f"   ... done. Uploaded new SLPK item '{new_slpk_item.title}' with id '{new_slpk_item.id}'")
 
     print("Publish new scene layer from new SLPK...")
@@ -155,6 +153,11 @@ def get_gis():
         password = getpass.getpass(prompt='arcgis password:')
     gis = GIS(username=user_name, password=password, verify_cert=False)
     return gis
+
+
+def make_name_unique(name):
+    random_suffix = ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(5))
+    return f'{name}_{random_suffix}'
 
 
 # --- code copy from pyprt_arcgis start ---
