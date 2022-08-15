@@ -27,7 +27,9 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 
 PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`. To run the examples a few more packages are required, so please read on! :-)
 
-(*) A note regarding Python 3.9 and Conda: The arcgis package for Python 3.9 is not yet available in Conda, therefore the examples 8 and 9 are not working with Python 3.9 in a Conda environment.
+Notes regarding Python 3.9 and Conda:
+ - The arcgis package for Python 3.9 is not yet available in Conda, therefore the examples 8 and 9 are not working with Python 3.9 in a Conda environment.
+ - To open the Jupyter notebook examples, run `conda update --all` before calling `jupyter notebook` in the Anaconda prompt. This will make sure the packages are up to date.
 
 ### Using virtualenv and pip
 
@@ -37,6 +39,9 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
    1. Update to latest `pip`:
       * Linux: `.venv/bin/python -m pip install --upgrade pip`
       * Windows: `.venv\Scripts\python -m pip install --upgrade pip`
+    1. Update to latest `wheel`:
+      * Linux: `.venv/bin/python -m pip install --upgrade wheel`
+      * Windows: `.venv\Scripts\python -m pip install --upgrade wheel`
    1. Install required packages for the example - this will fetch PyPRT from PyPI and all packages necessary to run the examples (replace `py38` with the used Python version):
       * Linux: `.venv/bin/python -m pip install -r envs/linux/requirements-py38.txt`
       * Windows: `.venv\Scripts\python -m pip install -r envs\windows\requirements-py38.txt`
