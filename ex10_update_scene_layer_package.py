@@ -237,7 +237,7 @@ def arcgis_to_pyprt(feature_set):
                     elif len(coord_part[0]) == 3:
                         coord_fin = swap_yz_dimensions(coord_inverse)
                     else:
-                        print("Only 2D or 3D points are supported.")
+                        raise "Only 2D or 3D points are supported."
 
                     vert_coord_list.extend(coord_fin[0])
                     nb_pts = len(coord_fin[0]) / 3
@@ -250,9 +250,7 @@ def arcgis_to_pyprt(feature_set):
                 initial_geometry = pyprt.InitialShape(vert_coord_list, face_indices_list, face_count_list, holes)
                 initial_geometries.append(initial_geometry)
         except:
-            print("This feature is not valid: ")
-            print(feature)
-            print()
+            print(f'Ignoring invalid feature with id = {feature.get_field("OBJECTID")}.')
     return initial_geometries
 
 
