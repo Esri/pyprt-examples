@@ -1,4 +1,4 @@
-name: pyprt-examples
+name: pyprt-examples-py38
 channels:
   - esri
   - conda-forge
