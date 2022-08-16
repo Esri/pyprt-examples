@@ -17,6 +17,13 @@
 # We use PyPRT to create a Scene Layer with a 3d visualization of the Swiss population density. We then
 # recreate the Scene Layer with different visualization properties and show how the Web Scene updates automatically.
 
+# You might want to use the keyring package to store your credentials for arcgis.com.
+# The example script will automatically pick them up.
+# To store the credentials execute the following once in a terminal:
+# $ python
+# >>> import keyring
+# >>> keyring.set_password("arcgis.com", "your_user", "your_password")
+
 # Example Steps:
 # 1. At first run, the script will create a new Scene Layer called 'PyPRT_Ex10_Scene_Layer_<random suffix>'
 # 2. On ArcGIS Online, create a Web Scene with this new Scene Layer
