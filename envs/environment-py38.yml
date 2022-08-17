@@ -1,4 +1,4 @@
-name: pyprt-examples
+name: pyprt-examples-py38
 channels:
   - esri
   - conda-forge
@@ -11,6 +11,7 @@ dependencies:
   - arcgis=2.0.0
   - notebook
   - scipy
+  - shapely=1.8.2
   - vispy
   - pip:
     - pygel3d
