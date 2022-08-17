@@ -2,7 +2,6 @@ name: pyprt-examples-py39
 channels:
   - esri
   - conda-forge
-  - defaults
   - anaconda
 dependencies:
   - pip
@@ -12,8 +11,8 @@ dependencies:
   - scipy
   - shapely=1.8.2
   - vispy
-  - ipywidgets
+  - pyvista
+  - ipyvtklink
   - pip:
-    - pygel3d
-    - pyqt5
     - notebook
+    - pyqt5
