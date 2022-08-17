@@ -113,6 +113,7 @@ scipy==1.8.1
 scooby==0.6.0
 Send2Trash==1.8.0
 setuptools-scm==7.0.5
+Shapely==1.8.2
 six==1.16.0
 sniffio==1.2.0
 soupsieve==2.3.2.post1
