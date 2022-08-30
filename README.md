@@ -20,15 +20,14 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 ## Requirements
 
 * Windows 10 64bit or Linux 64bit (RHEL7/CentOS7 compatible distro)
-* Python 3.6 64bit or later. Please note, we currently provide PyPRT builds for Python 3.6, 3.8 and 3.9 (as well as 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
+* Python 3.7 64bit or later. Please note, we currently provide PyPRT builds for Python 3.8 and 3.9 (as well as 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
 * Packages (see `envs` directory): pyprt, arcgis, notebook, vispy, PyQT5, scipy, pyvista, ipyvtklink, tornado
 
 ## Running the examples
 
 PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`. To run the examples a few more packages are required, so please read on! :-)
 
-Notes regarding Python 3.9 and Conda:
- - The arcgis package for Python 3.9 is not yet available in Conda, therefore the examples 8 and 9 are not working with Python 3.9 in a Conda environment.
+Notes regarding Conda:
  - To open the Jupyter notebook examples, run `conda update --all` before calling `jupyter notebook` in the Anaconda prompt. This will make sure the packages are up to date.
 
 ### Using virtualenv and pip
@@ -54,7 +53,7 @@ Notes regarding Python 3.9 and Conda:
 ### Alternative: using Anaconda
 
 1. Open the Anaconda prompt and change to the directory where you checked out this repository.
-1. Ensure you have a working Anaconda Python 3.6 or 3.8 64bit installation (or additionally Python 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself at the moment.
+1. Ensure you have a working Anaconda Python 3.8 or 3.9 64bit installation (or additionally Python 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself at the moment.
 1. Run `conda env create --prefix env --file envs/environment-py38.yml` to install PyPRT and all dependencies for the examples (replace `py38` with the used Python version).
 1. Activate the Anaconda environment: `conda activate ./env`
 1. Now run e.g. `python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `jupyter notebook` and open the desired example notebook in the opening browser page.
