@@ -62,7 +62,7 @@ Notes regarding Conda:
 
 <table style="width:100%">
   <tr>
-    <th>Example</th>
+    <th>#</th>
     <th>Features</th> 
     <th>Notes</th>
   </tr>
@@ -121,7 +121,8 @@ Notes regarding Conda:
     <td>This example demonstrates how an existing Scene Layer can be updated without having to touch any related Web Scenes. We use PyPRT to create a Scene Layer with a 3d visualization of the Swiss population density. We then recreate the Scene Layer with different visualization properties and show how the Web Scene updates automatically.</td>
     <td>You might want to use the keyring package to store your credentials for arcgis.com. The example script will automatically pick them up.<br/>To store the credentials execute the following once in a terminal:<pre>$ python
 >>> import keyring
->>> keyring.set_password("arcgis.com", "your_user", "your_password")</pre></td>
+>>> keyring.set_password("arcgis.com",
+      "your_user", "your_password")</pre></td>
   </tr>
 </table>
 
