@@ -62,52 +62,52 @@ Notes regarding Conda:
 
 <table style="width:100%">
   <tr>
-    <th>Name</th>
+    <th>Example</th>
     <th>Features</th> 
     <th>Notes</th>
   </tr>
   <tr>
-    <td>ex1_python_encoder.py</td>
+    <td>1</td>
     <td>This example shows the use of the Python encoder and the encoder options for generating (or not) geometries and CGA reports. </td>
     <td> </td>
   </tr>
   <tr>
-    <td>ex2_obj_initial_shape.py</td>
+    <td>2</td>
     <td>This example demonstrates the use of an OBJ file as initial shape.</td>
     <td> </td>
   </tr>
   <tr>
-    <td>ex3_format_exporter.py</td>
+    <td>3</td>
     <td>In this example, the generated models are exported as OBJ files using the PRT OBJ exporter.</td>
     <td> </td>
   </tr>
   <tr>
-    <td>ex4_multi_generations.py</td>
+    <td>4</td>
     <td>This example shows the two ways of calling the generate_model function in case of multiple successive geometry generations.</td> 
     <td> </td>
   </tr>
   <tr>
-    <td>ex5_dataset_collection.ipynb</td>
+    <td>5</td>
     <td>This example demonstrates how PyPRT can be used to collect a dataset stored as pandas dataframe, using the PyEncoder options.</td>
     <td> </td>
   </tr>
   <tr>
-    <td>ex6_3d_visualization_vispy.py</td>
+    <td>6</td>
     <td>In this examples, VisPy is used as a mesh visualization tool taking PyPRT generated model (vertices and faces) as input.</td>
     <td> </td>
   </tr>
   <tr>
-    <td>ex7_building_modeling_optimization.ipynb</td>
+    <td>7</td>
     <td>This example is about optimizing the attributes of a building generated on a parcel considering the green area of the building. SciPy is used as the optimization library.</td>
     <td><a href="https://docs.pyvista.org/">PyVista</a> is used as a visualization tool in this example.</td>
   </tr>
   <tr>
-    <td>ex8_3d_gis_content_generation.ipynb</td>
+    <td>8</td>
     <td>This example demonstrates how PyPRT can be used with the <a href="https://developers.arcgis.com/python/">ArcGIS API for Python</a> in order to collect data from <a href="https://www.esri.com/en-us/arcgis/products/arcgis-online/overview">ArcGIS Online</a>, generate 3D content and publish the content back to ArcGIS Online.</td>
     <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://developers.arcgis.com/">ArcGIS Developer account</a>. Also, the published item needs to be manually deleted from the ArcGIS Online account before the example script can be run again (we do not want to delete things from your account).</td>
   </tr>
   <tr>
-    <td>ex9_model_vis_web.py</td>
+    <td>9</td>
     <td>In this example, PyPRT is used as a 3D geometry converter. Using PyPRT, the <a href="https://developers.arcgis.com/javascript/">ArcGIS JavaScript API</a> and the <a href="https://developers.arcgis.com/python/">ArcGIS API for Python</a>, you can visualize your 3D model on a map in the Web.</td>
     <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://www.esri.com/en-us/arcgis/products/create-account">ArcGIS Online account</a>. To try the example, run
 	  <code>
@@ -117,7 +117,7 @@ Notes regarding Conda:
 	</td>
   </tr>
   <tr>
-    <td>ex10_update_scene_layer_package.py</td>
+    <td>10</td>
     <td>This example demonstrates how an existing Scene Layer can be updated without having to touch any related Web Scenes. We use PyPRT to create a Scene Layer with a 3d visualization of the Swiss population density. We then recreate the Scene Layer with different visualization properties and show how the Web Scene updates automatically.</td>
     <td>You might want to use the keyring package to store your credentials for arcgis.com. The example script will automatically pick them up.<br/>To store the credentials execute the following once in a terminal:<pre>$ python
 >>> import keyring
@@ -131,16 +131,12 @@ Notes regarding Conda:
 <table style="width:100%">
   <tr>
     <th>Rule Package</th>
-    <th>CGB Rule File</th>
-	<th>Start Rule</th> 
     <th>Shape Attributes</th>
 	<th>Attributes Default Values</th>
     <th>Brief Description</th>
   </tr>
   <tr>
     <td>candler.rpk</td>
-    <td>bin/candler.cgb</td>
-	<td>Default$Footprint</td>
     <td>BuildingHeight<br/>
 		Mode<br/>
 		FloorHeight<br/>
@@ -171,8 +167,6 @@ Notes regarding Conda:
   </tr>
   <tr>
     <td>envelope2002.rpk</td>
-    <td>rules/typology/envelope2002.cgb</td>
-    <td>Default$Lot</td>
     <td>Density_bonus_height<br/>
 		shape_of_building<br/>
 		lot_coverage_parameter<br/>
@@ -201,8 +195,6 @@ Notes regarding Conda:
   </tr>
   <tr>
     <td>extrusion_rule.rpk</td>
-    <td>bin/extrusion_rule.cgb</td>
-    <td>Default$Footprint</td>
     <td>minBuildingHeight<br/>
 		maxBuildingHeight<br/>
 		buildingColor<br/>
@@ -217,16 +209,12 @@ Notes regarding Conda:
   </tr>
   <tr>
     <td>noRule.rpk</td>
-    <td>bin/noRule.cgb</td>
-    <td>Default$Lot</td>
-    <td> </td>
-	<td> </td>
+    <td/>
+	<td/>
     <td>Performs the identity operation.</td>
   </tr>
   <tr>
     <td>translateModel.rpk</td>
-    <td>bin/translateModel.cgb</td>
-    <td>Default$Lot</td>
     <td>vec_x<br/>
 		vec_y<br/>
 		vec_z</td>
