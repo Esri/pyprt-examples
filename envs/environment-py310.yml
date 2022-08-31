@@ -1,0 +1,16 @@
+name: pyprt-examples-py310
+channels:
+  - esri
+  - conda-forge
+  - anaconda
+dependencies:
+  - pip
+  - python=3.10
+  - pyprt
+  - scipy
+  - vispy
+  - pyvista
+  - ipyvtklink
+  - pip:
+    - notebook
+    - pyqt5
