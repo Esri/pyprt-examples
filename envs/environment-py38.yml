@@ -7,9 +7,9 @@ dependencies:
   - pip
   - python=3.8
   - pyprt  
-  - arcgis=2.0.0
+  - arcgis
   - scipy
-  - shapely=1.8.2
+  - shapely=1.8.5
   - vispy
   - pyvista
   - ipyvtklink
