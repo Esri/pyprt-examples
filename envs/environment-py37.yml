@@ -1,18 +1,14 @@
 name: pyprt-examples-py37
 channels:
-  - esri
-  - conda-forge
-  - anaconda
+  - defaults
 dependencies:
-  - pip
   - python=3.7
-  - pyprt  
-  - arcgis
+  - esri::pyprt
+  - esri::arcgis
   - scipy
-  - shapely=1.8.5
+  - shapely
   - vispy
-  - pyvista
-  - ipyvtklink
-  - pip:
-    - notebook
-    - pyqt5
+  - conda-forge::pyvista
+  - conda-forge::ipyvtklink
+  - notebook
+  - pyqt
