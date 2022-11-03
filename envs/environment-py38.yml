@@ -1,18 +1,14 @@
 name: pyprt-examples-py38
 channels:
-  - esri
-  - conda-forge
-  - anaconda
+  - defaults
 dependencies:
-  - pip
   - python=3.8
-  - pyprt  
-  - arcgis=2.0.0
+  - esri::pyprt
+  - esri::arcgis
   - scipy
-  - shapely=1.8.2
-  - vispy
-  - pyvista
-  - ipyvtklink
-  - pip:
-    - notebook
-    - pyqt5
+  - shapely
+  - conda-forge::vispy
+  - conda-forge::pyvista
+  - conda-forge::ipyvtklink
+  - notebook
+  - pyqt
