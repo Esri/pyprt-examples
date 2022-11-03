@@ -10,3 +10,4 @@ dependencies:
   - conda-forge::ipyvtklink
   - notebook
   - pandas
+  - pyqt
