@@ -21,7 +21,7 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 
 * Windows 10 64bit or Linux 64bit (RHEL7/CentOS7 compatible distro)
 * Python 3.7 64bit or later. Please note, we currently provide PyPRT builds for Python 3.8, 3.9 and 3.10(*) (as well as 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
-* Packages (see `envs` directory): pyprt, arcgis, notebook, vispy, scipy, pyvista, ipyvtklink, tornado, shapely
+* Packages (see `envs` directory): pyprt, arcgis, notebook, vispy, pyqt, pandas, scipy, pyvista, ipyvtklink, tornado, shapely
 
 (*) A note regarding Python 3.10: The arcgis package for Python 3.10 is not yet available, therefore the examples 8, 9 and 10 are not yet supported with Python 3.10.
 
