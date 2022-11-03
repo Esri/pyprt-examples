@@ -21,7 +21,7 @@ from pyprt.pyprt_utils import vertices_vector_to_matrix, faces_indices_vectors_t
 
 import numpy as np
 import itertools
-from vispy import app, scene, visuals
+from vispy import app, scene
 from vispy.color import Color
 from vispy.geometry.meshdata import MeshData
 
