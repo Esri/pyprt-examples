@@ -5,8 +5,8 @@ dependencies:
   - python=3.10
   - esri::pyprt
   - scipy
-  - vispy
+  - conda-forge::vispy
   - conda-forge::pyvista
   - conda-forge::ipyvtklink
   - notebook
-  - pyqt
+  - pandas
