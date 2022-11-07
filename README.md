@@ -2,7 +2,7 @@
 
 <img align="left" alt="PyPRT Icon" width="40px" src="images/pyprt_logo.png" />
 
-PyPRT provides a Python binding for PRT (Procedural RunTime) of CityEngine. This enables the execution of CityEngine CGA rules within Python. PyPRT allows to easily and efficiently generate 3D geometries, process them as Python data structures and export them to multiple 3D file formats.
+PyPRT provides a Python binding for the [CityEngine Procedural RunTime (PRT)](https://github.com/esri/cityengine-sdk). This enables the execution of CityEngine CGA rules within Python. PyPRT allows to easily and efficiently generate 3D geometries, process them as Python data structures and export them to [multiple 3D file formats](https://esri.github.io/cityengine-sdk/html/esri_prt_codecs.html).
 
 This repo contains examples of PyPRT usage. You can find installation instructions and the source code in the main [PyPRT](https://github.com/Esri/pyprt) repository.
 
@@ -12,10 +12,15 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 ## Table of Contents
 
 * [Requirements](#requirements)
-* [Running the examples](#running-the-examples)
+* [Running the Examples](#running-the-examples)
 * [Available Examples](#available-examples)
 * [Provided Rule Packages](#provided-rule-packages)
 * [Licensing Information](#licensing-information)
+
+### More Documentation
+  * [Built-In PRT Encoders and Options](https://esri.github.io/cityengine-sdk/html/esri_prt_codecs.html)
+  * [Authoring of Rule Packages in CityEngine](https://doc.arcgis.com/en/cityengine/latest/help/help-rule-package.htm#ESRI_SECTION1_F9D4CCCE0EC74E5FB646A8BD141A38F9)
+  * [CityEngine SDK (PRT) C++ API Reference](https://esri.github.io/cityengine-sdk/html/index.html)
 
 ## Requirements
 
