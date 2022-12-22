@@ -1,10 +1,9 @@
-arcgis
 ipyvtklink
 notebook
+pandas
 PyPRT
 PyQt5
 pyvista
 scipy
-Shapely
 tornado
 vispy

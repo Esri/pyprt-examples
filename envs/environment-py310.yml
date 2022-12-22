@@ -1,14 +1,13 @@
-name: pyprt-examples-py39
+name: pyprt-examples-py310
 channels:
   - defaults
 dependencies:
-  - python=3.9
+  - python=3.10
   - esri::pyprt
-  - esri::arcgis
   - scipy
-  - shapely
   - conda-forge::vispy
   - conda-forge::pyvista
   - conda-forge::ipyvtklink
   - notebook
+  - pandas
   - pyqt

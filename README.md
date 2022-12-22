@@ -2,7 +2,7 @@
 
 <img align="left" alt="PyPRT Icon" width="40px" src="images/pyprt_logo.png" />
 
-PyPRT provides a Python binding for PRT (Procedural RunTime) of CityEngine. This enables the execution of CityEngine CGA rules within Python. PyPRT allows to easily and efficiently generate 3D geometries, process them as Python data structures and export them to multiple 3D file formats.
+PyPRT provides a Python binding for the [CityEngine Procedural RunTime (PRT)](https://github.com/esri/cityengine-sdk). This enables the execution of CityEngine CGA rules within Python. PyPRT allows to easily and efficiently generate 3D geometries, process them as Python data structures and export them to [multiple 3D file formats](https://esri.github.io/cityengine-sdk/html/esri_prt_codecs.html).
 
 This repo contains examples of PyPRT usage. You can find installation instructions and the source code in the main [PyPRT](https://github.com/Esri/pyprt) repository.
 
@@ -12,23 +12,29 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 ## Table of Contents
 
 * [Requirements](#requirements)
-* [Running the examples](#running-the-examples)
+* [Running the Examples](#running-the-examples)
 * [Available Examples](#available-examples)
 * [Provided Rule Packages](#provided-rule-packages)
 * [Licensing Information](#licensing-information)
 
+### More Documentation
+  * [Built-In PRT Encoders and Options](https://esri.github.io/cityengine-sdk/html/esri_prt_codecs.html)
+  * [Authoring of Rule Packages in CityEngine](https://doc.arcgis.com/en/cityengine/latest/help/help-rule-package.htm#ESRI_SECTION1_F9D4CCCE0EC74E5FB646A8BD141A38F9)
+  * [CityEngine SDK (PRT) C++ API Reference](https://esri.github.io/cityengine-sdk/html/index.html)
+
 ## Requirements
 
 * Windows 10 64bit or Linux 64bit (RHEL7/CentOS7 compatible distro)
-* Python 3.6 64bit or later. Please note, we currently provide PyPRT builds for Python 3.6, 3.8 and 3.9 (as well as 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
-* Packages (see `envs` directory): pyprt, arcgis 1.9.0, notebook, vispy, PyQT5, scipy, PyGEL3D, tornado
+* Python 3.7 64bit or later. Please note, we currently provide PyPRT builds for Python 3.8, 3.9 and 3.10(*) (as well as 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
+* Packages (see `envs` directory): pyprt, arcgis, notebook, vispy, pyqt, pandas, scipy, pyvista, ipyvtklink, tornado, shapely
+
+(*) A note regarding Python 3.10: The arcgis package for Python 3.10 is not yet available, therefore the examples 8, 9 and 10 are not yet supported with Python 3.10.
 
 ## Running the examples
 
 PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`. To run the examples a few more packages are required, so please read on! :-)
 
-Notes regarding Python 3.9 and Conda:
- - The arcgis package for Python 3.9 is not yet available in Conda, therefore the examples 8 and 9 are not working with Python 3.9 in a Conda environment.
+Notes regarding Conda:
  - To open the Jupyter notebook examples, run `conda update --all` before calling `jupyter notebook` in the Anaconda prompt. This will make sure the packages are up to date.
 
 ### Using virtualenv and pip
@@ -39,6 +45,9 @@ Notes regarding Python 3.9 and Conda:
    1. Update to latest `pip`:
       * Linux: `.venv/bin/python -m pip install --upgrade pip`
       * Windows: `.venv\Scripts\python -m pip install --upgrade pip`
+    1. Update to latest `wheel`:
+      * Linux: `.venv/bin/python -m pip install --upgrade wheel`
+      * Windows: `.venv\Scripts\python -m pip install --upgrade wheel`
    1. Install required packages for the example - this will fetch PyPRT from PyPI and all packages necessary to run the examples (replace `py38` with the used Python version):
       * Linux: `.venv/bin/python -m pip install -r envs/linux/requirements-py38.txt`
       * Windows: `.venv\Scripts\python -m pip install -r envs\windows\requirements-py38.txt`
@@ -51,7 +60,7 @@ Notes regarding Python 3.9 and Conda:
 ### Alternative: using Anaconda
 
 1. Open the Anaconda prompt and change to the directory where you checked out this repository.
-1. Ensure you have a working Anaconda Python 3.6 or 3.8 64bit installation (or additionally Python 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself at the moment.
+1. Ensure you have a working Anaconda Python 3.8, 3.9 or 3.10 64bit installation (or additionally Python 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself at the moment.
 1. Run `conda env create --prefix env --file envs/environment-py38.yml` to install PyPRT and all dependencies for the examples (replace `py38` with the used Python version).
 1. Activate the Anaconda environment: `conda activate ./env`
 1. Now run e.g. `python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `jupyter notebook` and open the desired example notebook in the opening browser page.
@@ -60,52 +69,52 @@ Notes regarding Python 3.9 and Conda:
 
 <table style="width:100%">
   <tr>
-    <th>Name</th>
+    <th>#</th>
     <th>Features</th> 
     <th>Notes</th>
   </tr>
   <tr>
-    <td>ex1_python_encoder.py</td>
+    <td>1</td>
     <td>This example shows the use of the Python encoder and the encoder options for generating (or not) geometries and CGA reports. </td>
     <td> </td>
   </tr>
   <tr>
-    <td>ex2_obj_initial_shape.py</td>
+    <td>2</td>
     <td>This example demonstrates the use of an OBJ file as initial shape.</td>
     <td> </td>
   </tr>
   <tr>
-    <td>ex3_format_exporter.py</td>
+    <td>3</td>
     <td>In this example, the generated models are exported as OBJ files using the PRT OBJ exporter.</td>
     <td> </td>
   </tr>
   <tr>
-    <td>ex4_multi_generations.py</td>
+    <td>4</td>
     <td>This example shows the two ways of calling the generate_model function in case of multiple successive geometry generations.</td> 
     <td> </td>
   </tr>
   <tr>
-    <td>ex5_dataset_collection.ipynb</td>
+    <td>5</td>
     <td>This example demonstrates how PyPRT can be used to collect a dataset stored as pandas dataframe, using the PyEncoder options.</td>
     <td> </td>
   </tr>
   <tr>
-    <td>ex6_3d_visualization_vispy.py</td>
+    <td>6</td>
     <td>In this examples, VisPy is used as a mesh visualization tool taking PyPRT generated model (vertices and faces) as input.</td>
     <td> </td>
   </tr>
   <tr>
-    <td>ex7_building_modeling_optimization.ipynb</td>
+    <td>7</td>
     <td>This example is about optimizing the attributes of a building generated on a parcel considering the green area of the building. SciPy is used as the optimization library.</td>
-    <td><a href="https://pypi.org/project/PyGEL3D">PyGEL3D</a> is used as a visualization tool in this example. There is currently a known issue that the display is using the wrong up axis.</td>
+    <td><a href="https://docs.pyvista.org/">PyVista</a> is used as a visualization tool in this example.</td>
   </tr>
   <tr>
-    <td>ex8_3d_gis_content_generation.ipynb</td>
+    <td>8</td>
     <td>This example demonstrates how PyPRT can be used with the <a href="https://developers.arcgis.com/python/">ArcGIS API for Python</a> in order to collect data from <a href="https://www.esri.com/en-us/arcgis/products/arcgis-online/overview">ArcGIS Online</a>, generate 3D content and publish the content back to ArcGIS Online.</td>
     <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://developers.arcgis.com/">ArcGIS Developer account</a>. Also, the published item needs to be manually deleted from the ArcGIS Online account before the example script can be run again (we do not want to delete things from your account).</td>
   </tr>
   <tr>
-    <td>ex9_model_vis_web.py</td>
+    <td>9</td>
     <td>In this example, PyPRT is used as a 3D geometry converter. Using PyPRT, the <a href="https://developers.arcgis.com/javascript/">ArcGIS JavaScript API</a> and the <a href="https://developers.arcgis.com/python/">ArcGIS API for Python</a>, you can visualize your 3D model on a map in the Web.</td>
     <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://www.esri.com/en-us/arcgis/products/create-account">ArcGIS Online account</a>. To try the example, run
 	  <code>
@@ -113,6 +122,14 @@ Notes regarding Python 3.9 and Conda:
       </code>
 	  in your Python environment.
 	</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>This example demonstrates how an existing Scene Layer can be updated without having to touch any related Web Scenes. We use PyPRT to create a Scene Layer with a 3d visualization of the Swiss population density. We then recreate the Scene Layer with different visualization properties and show how the Web Scene updates automatically.</td>
+    <td>You might want to use the keyring package to store your credentials for arcgis.com. The example script will automatically pick them up.<br/>To store the credentials execute the following once in a terminal:<pre>$ python
+>>> import keyring
+>>> keyring.set_password("arcgis.com",
+      "your_user", "your_password")</pre></td>
   </tr>
 </table>
 
@@ -122,16 +139,12 @@ Notes regarding Python 3.9 and Conda:
 <table style="width:100%">
   <tr>
     <th>Rule Package</th>
-    <th>CGB Rule File</th>
-	<th>Start Rule</th> 
     <th>Shape Attributes</th>
 	<th>Attributes Default Values</th>
     <th>Brief Description</th>
   </tr>
   <tr>
     <td>candler.rpk</td>
-    <td>bin/candler.cgb</td>
-	<td>Default$Footprint</td>
     <td>BuildingHeight<br/>
 		Mode<br/>
 		FloorHeight<br/>
@@ -162,8 +175,6 @@ Notes regarding Python 3.9 and Conda:
   </tr>
   <tr>
     <td>envelope2002.rpk</td>
-    <td>rules/typology/envelope2002.cgb</td>
-    <td>Default$Lot</td>
     <td>Density_bonus_height<br/>
 		shape_of_building<br/>
 		lot_coverage_parameter<br/>
@@ -192,8 +203,6 @@ Notes regarding Python 3.9 and Conda:
   </tr>
   <tr>
     <td>extrusion_rule.rpk</td>
-    <td>bin/extrusion_rule.cgb</td>
-    <td>Default$Footprint</td>
     <td>minBuildingHeight<br/>
 		maxBuildingHeight<br/>
 		buildingColor<br/>
@@ -208,16 +217,12 @@ Notes regarding Python 3.9 and Conda:
   </tr>
   <tr>
     <td>noRule.rpk</td>
-    <td>bin/noRule.cgb</td>
-    <td>Default$Lot</td>
-    <td> </td>
-	<td> </td>
+    <td/>
+	<td/>
     <td>Performs the identity operation.</td>
   </tr>
   <tr>
     <td>translateModel.rpk</td>
-    <td>bin/translateModel.cgb</td>
-    <td>Default$Lot</td>
     <td>vec_x<br/>
 		vec_y<br/>
 		vec_z</td>

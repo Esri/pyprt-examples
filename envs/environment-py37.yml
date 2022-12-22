@@ -1,17 +1,14 @@
-name: pyprt-examples
+name: pyprt-examples-py37
 channels:
-  - esri
-  - conda-forge
   - defaults
-  - anaconda
 dependencies:
-  - pip
   - python=3.7
-  - pyprt  
-  - arcgis=1.9.0
-  - notebook
+  - esri::pyprt
+  - esri::arcgis
   - scipy
-  - vispy
-  - pip:
-    - pygel3d
-    - pyqt5
+  - shapely
+  - conda-forge::vispy
+  - conda-forge::pyvista
+  - conda-forge::ipyvtklink
+  - notebook
+  - pyqt
