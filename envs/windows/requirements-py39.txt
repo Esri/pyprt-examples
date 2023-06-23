@@ -2,6 +2,7 @@ arcgis
 urllib3<1.26.0
 ipyvtklink
 notebook
+nbextensions
 PyPRT
 PyQt5
 pyvista
