@@ -1,9 +1,11 @@
 arcgis
+urllib3<1.26.0
 ipyvtklink
 notebook
 PyPRT
 PyQt5
 pyvista
+trame
 scipy
 Shapely
 tornado
