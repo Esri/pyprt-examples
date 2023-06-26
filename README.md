@@ -65,6 +65,11 @@ Notes regarding Conda:
 1. Activate the Anaconda environment: `conda activate ./env`
 1. Now run e.g. `python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `jupyter notebook` and open the desired example notebook in the opening browser page.
 
+### In case of issues with Jupyter Notebook
+* If the map widgets in e.g. example 8 do not show up, try to [manually enable](https://developers.arcgis.com/python/guide/install-and-set-up/#install-offline) the corresponding notebook extensions:
+   * `jupyter nbextension enable --py --sys-prefix widgetsnbextension`
+   * `jupyter nbextension enable --py --sys-prefix arcgis`
+
 ## Available Examples
 
 <table style="width:100%">
