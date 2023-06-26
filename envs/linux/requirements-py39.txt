@@ -11,4 +11,4 @@ scipy
 Shapely
 tornado
 vispy
-numpy==1.21.6
+numpy<1.24.0
