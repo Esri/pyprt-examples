@@ -34,9 +34,6 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 
 PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`. To run the examples a few more packages are required, so please read on! :-)
 
-Notes regarding Conda:
- - To open the Jupyter notebook examples, run `conda update --all` before calling `jupyter notebook` in the Anaconda prompt. This will make sure the packages are up to date.
-
 ### Using virtualenv and pip
 
 1. Open a shell and change to the root of this example repository.
@@ -69,6 +66,7 @@ Notes regarding Conda:
 * If the map widgets in e.g. example 8 do not show up, try to [manually enable](https://developers.arcgis.com/python/guide/install-and-set-up/#install-offline) the corresponding notebook extensions:
    * `jupyter nbextension enable --py --sys-prefix widgetsnbextension`
    * `jupyter nbextension enable --py --sys-prefix arcgis`
+* If the notebook examples do not open correctly in a Conda environment, try to run `conda update --all` before running `jupyter notebook`. This will make sure the packages are up-to-date.
 
 ## Available Examples
 
