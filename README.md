@@ -59,6 +59,7 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
 1. Open the Anaconda prompt and change to the directory where you checked out this repository.
 1. Ensure you have a working Anaconda Python 3.8, 3.9 or 3.10 64bit installation (or additionally Python 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself at the moment.
 1. Run `conda env create --prefix env --file envs/environment-py38.yml` to install PyPRT and all dependencies for the examples (replace `py38` with the used Python version).
+   * In case `conda env create` takes very long or runs into errors, try to remove `arcgis` from `environment-pyXX.yml` and manually call `conda install --prefix env -c esri arcgis`. 
 1. Activate the Anaconda environment: `conda activate ./env`
 1. Now run e.g. `python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `jupyter notebook` and open the desired example notebook in the opening browser page.
 
