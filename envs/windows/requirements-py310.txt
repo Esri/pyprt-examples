@@ -1,5 +1,6 @@
 ipyvtklink
 notebook
+nbextensions
 pandas
 PyPRT
 PyQt5
