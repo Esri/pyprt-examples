@@ -8,6 +8,8 @@ dependencies:
   - conda-forge::vispy
   - conda-forge::pyvista
   - conda-forge::ipyvtklink
+  - conda-forge::trame
   - notebook
   - pandas
   - pyqt
+  - numpy<1.24.0

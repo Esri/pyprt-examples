@@ -24,18 +24,15 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 
 ## Requirements
 
-* Windows 10 64bit or Linux 64bit (RHEL7/CentOS7 compatible distro)
-* Python 3.7 64bit or later. Please note, we currently provide PyPRT builds for Python 3.8, 3.9 and 3.10(*) (as well as 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
-* Packages (see `envs` directory): pyprt, arcgis, notebook, vispy, pyqt, pandas, scipy, pyvista, ipyvtklink, tornado, shapely
+* Windows 10/11 64bit or Linux 64bit (RHEL 7/8/9 and compatible distributions)
+* Python 3.7 64bit or later. Please note, we currently provide PyPRT builds for Python 3.7 (only Windows), 3.8, 3.9 and 3.10(*). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
+* Required Python packages: see `envs` directory
 
-(*) A note regarding Python 3.10: The arcgis package for Python 3.10 is not yet available, therefore the examples 8, 9 and 10 are not yet supported with Python 3.10.
+(*) A note regarding Python 3.10: The arcgis package is [not yet available for Python 3.10](https://developers.arcgis.com/python/guide/system-requirements/), therefore the examples 8, 9 and 10 are not yet supported with Python 3.10.
 
 ## Running the examples
 
 PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`. To run the examples a few more packages are required, so please read on! :-)
-
-Notes regarding Conda:
- - To open the Jupyter notebook examples, run `conda update --all` before calling `jupyter notebook` in the Anaconda prompt. This will make sure the packages are up to date.
 
 ### Using virtualenv and pip
 
@@ -62,8 +59,15 @@ Notes regarding Conda:
 1. Open the Anaconda prompt and change to the directory where you checked out this repository.
 1. Ensure you have a working Anaconda Python 3.8, 3.9 or 3.10 64bit installation (or additionally Python 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself at the moment.
 1. Run `conda env create --prefix env --file envs/environment-py38.yml` to install PyPRT and all dependencies for the examples (replace `py38` with the used Python version).
+   * In case `conda env create` takes very long or runs into errors, try to remove `arcgis` from `environment-pyXX.yml` and manually call `conda install --prefix env -c esri arcgis`. 
 1. Activate the Anaconda environment: `conda activate ./env`
 1. Now run e.g. `python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `jupyter notebook` and open the desired example notebook in the opening browser page.
+
+### In case of issues with Jupyter Notebook
+* If the map widgets in e.g. example 8 do not show up, try to [manually enable](https://developers.arcgis.com/python/guide/install-and-set-up/#install-offline) the corresponding notebook extensions:
+   * `jupyter nbextension enable --py --sys-prefix widgetsnbextension`
+   * `jupyter nbextension enable --py --sys-prefix arcgis`
+* If the notebook examples do not open correctly in a Conda environment, try to run `conda update --all` before running `jupyter notebook`. This will make sure the packages are up-to-date.
 
 ## Available Examples
 

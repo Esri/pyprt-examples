@@ -1,4 +1,4 @@
-# Copyright (c) 2012-2022 Esri R&D Center Zurich
+# Copyright (c) 2012-2023 Esri R&D Center Zurich
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ SOURCE_FEATURE_LAYER_ID = 'dfae9883bc3548dcbd29758ff8ea9234'  # Switzerland Kant
 SOURCE_FEATURE_LAYER_WKID = '3857'
 TARGET_SCENE_LAYER_ID = '0'
 TARGET_SCENE_LAYER_DEFAULT_NAME = 'PyPRT_Ex10_Scene_Layer'
-RULE_PACKAGE_ITEM_ID = '5ea3e57d47224c21b2678069cd325f84'
+RULE_PACKAGE_ITEM_ID = '4ab3503cd32c46e3ab129aa976b4f373'
 
 POPULATION_DENSITY_MODE = 'linear'  # or 'logarithmic'
 

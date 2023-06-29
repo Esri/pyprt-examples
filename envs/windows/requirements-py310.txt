@@ -1,9 +1,11 @@
 ipyvtklink
 notebook
+nbextensions
 pandas
 PyPRT
 PyQt5
 pyvista
+trame
 scipy
 tornado
 vispy
