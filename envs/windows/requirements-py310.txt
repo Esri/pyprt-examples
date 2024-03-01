@@ -1,11 +1,11 @@
-ipyvtklink
+arcgis
 notebook
-nbextensions
+numpy
 pandas
 PyPRT
 PyQt5
-pyvista
-trame
+pyvista[jupyter]
 scipy
+Shapely
 tornado
 vispy
