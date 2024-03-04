@@ -4,12 +4,19 @@ channels:
 dependencies:
   - python=3.10
   - esri::pyprt
-  - scipy
-  - conda-forge::vispy
-  - conda-forge::pyvista
-  - conda-forge::ipyvtklink
-  - conda-forge::trame
-  - notebook
+  - esri::arcgis
+  - numpy
   - pandas
   - pyqt
-  - numpy<1.24.0
+  - scipy
+  - shapely
+  - notebook<7.0
+  - ipywidgets
+  - conda-forge::vtk>=9.2
+  - conda-forge::pyvista
+  - conda-forge::trame
+  - conda-forge::trame-vtk
+  - conda-forge::trame-vuetify
+  - conda-forge::vispy
+  - conda-forge::ipyvtklink
+  
