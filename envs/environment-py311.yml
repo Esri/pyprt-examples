@@ -1,8 +1,8 @@
-name: pyprt-examples-py310
+name: pyprt-examples-py311
 channels:
   - defaults
 dependencies:
-  - python=3.10
+  - python=3.11
   - esri::pyprt
   - esri::arcgis
   - numpy
@@ -19,4 +19,3 @@ dependencies:
   - conda-forge::trame-vuetify
   - conda-forge::vispy
   - conda-forge::ipyvtklink
-  
