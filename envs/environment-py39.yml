@@ -5,12 +5,17 @@ dependencies:
   - python=3.9
   - esri::pyprt
   - esri::arcgis
+  - numpy
+  - pandas
+  - pyqt
   - scipy
   - shapely
-  - conda-forge::vispy
+  - notebook<7.0
+  - ipywidgets
+  - conda-forge::vtk>=9.2
   - conda-forge::pyvista
-  - conda-forge::ipyvtklink
   - conda-forge::trame
-  - notebook
-  - pyqt
-  - numpy<1.24.0
+  - conda-forge::trame-vtk
+  - conda-forge::trame-vuetify
+  - conda-forge::vispy
+  - conda-forge::ipyvtklink

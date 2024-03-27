@@ -1,4 +1,4 @@
-# Copyright (c) 2012-2023 Esri R&D Center Zurich
+# Copyright (c) 2012-2024 Esri R&D Center Zurich
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,8 +60,13 @@ def main():
     parser.add_argument('--venv_path', help='use specific venv location and keep it around', type=str, required=False)
     args = parser.parse_args()
 
-    venv_dir = tempfile.TemporaryDirectory(
-        prefix=f'pyprt-venv-test-py{env_py}') if not args.venv_path else args.venv_path
+    venv_temp_dir = None
+    venv_dir = None
+    if args.venv_path:
+        venv_dir = args.venv_path
+    else:
+        venv_temp_dir = tempfile.TemporaryDirectory(prefix=f'pyprt-venv-test-py{env_py}')
+        venv_dir = venv_temp_dir.name
 
     setup_venv_from_requirements(venv_dir, env_py)
     if args.pyprt_wheel:

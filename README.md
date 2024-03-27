@@ -25,10 +25,8 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 ## Requirements
 
 * Windows 10/11 64bit or Linux 64bit (RHEL 7/8/9 and compatible distributions)
-* Python 3.7 64bit or later. Please note, we currently provide PyPRT builds for Python 3.7 (only Windows), 3.8, 3.9 and 3.10(*). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
+* Python 3.8 64bit or later. Please note, we currently provide PyPRT builds for Python 3.8, 3.9, 3.10 and 3.11. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
 * Required Python packages: see `envs` directory
-
-(*) A note regarding Python 3.10: The arcgis package is [not yet available for Python 3.10](https://developers.arcgis.com/python/guide/system-requirements/), therefore the examples 8, 9 and 10 are not yet supported with Python 3.10.
 
 ## Running the examples
 
@@ -57,7 +55,7 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
 ### Alternative: using Anaconda
 
 1. Open the Anaconda prompt and change to the directory where you checked out this repository.
-1. Ensure you have a working Anaconda Python 3.8, 3.9 or 3.10 64bit installation (or additionally Python 3.7 on Windows). For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself at the moment.
+1. Ensure you have a working Anaconda Python 64bit installation, e.g. for Python 3.8.
 1. Run `conda env create --prefix env --file envs/environment-py38.yml` to install PyPRT and all dependencies for the examples (replace `py38` with the used Python version).
    * In case `conda env create` takes very long or runs into errors, try to remove `arcgis` from `environment-pyXX.yml` and manually call `conda install --prefix env -c esri arcgis`. 
 1. Activate the Anaconda environment: `conda activate ./env`
