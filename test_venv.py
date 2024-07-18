@@ -45,6 +45,7 @@ def add_custom_pyprt_wheel(venv_dir, pyprt_wheel_path):
 
 def run_examples(venv_dir):
     py_cmd = get_python_cmd(venv_dir)
+    os.system(f'{py_cmd} -c "import pyprt; print(pyprt.get_api_version())"')
     os.system(f"{py_cmd} ex1_python_encoder.py")
     os.system(f"{py_cmd} ex2_obj_initial_shape.py")
     os.system(f"{py_cmd} ex3_format_exporter.py")
