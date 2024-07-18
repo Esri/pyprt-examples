@@ -24,7 +24,7 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 
 ## Requirements
 
-* Windows 10/11 64bit or Linux 64bit (RHEL 7/8/9 and compatible distributions)
+* Windows 10/11 64bit or Linux 64bit (RHEL 8/9 and compatible distributions)
 * Python 3.8 64bit or later. Please note, we currently provide PyPRT builds for Python 3.8, 3.9, 3.10 and 3.11. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
 * Required Python packages: see `envs` directory
 
