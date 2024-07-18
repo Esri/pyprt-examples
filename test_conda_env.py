@@ -21,8 +21,8 @@ import tempfile
 
 
 def setup_conda_env_from_requirements(conda_cmd, conda_env, py_ver):
-    os.system(f"{conda_cmd} env remove -y -n {conda_env}")
-    os.system(f"{conda_cmd} env create -y -n {conda_env} --file envs/environment-py{py_ver}.yml")
+    os.system(f"{conda_cmd} env remove -n {conda_env} -y")
+    os.system(f"{conda_cmd} env create -n {conda_env} --file envs/environment-py{py_ver}.yml")
 
 
 # one cannot directly install/update a .tar.bz2 conda package
