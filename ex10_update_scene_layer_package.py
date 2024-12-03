@@ -142,15 +142,11 @@ def generate_scene_layer_package(gis, name, source_features, output_dir):
         'outputPath': output_dir
     }
 
-    pyprt.initialize_prt()
-
     pyprt_initial_shapes = arcgis_to_pyprt(source_features)
     pyprt_model_generator = pyprt.ModelGenerator(pyprt_initial_shapes)
     pyprt_model_generator.generate_model(attrs, rpk, pyprt_slpk_encoder, pyprt_slpk_options)
     pyprt_generated_slpk = os.path.join(output_dir, f'{name}.slpk')
     assert os.path.exists(pyprt_generated_slpk)
-
-    pyprt.shutdown_prt()
 
     return pyprt_generated_slpk
 

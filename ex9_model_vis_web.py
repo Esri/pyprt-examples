@@ -206,8 +206,6 @@ if __name__ == '__main__':
          {"path": ROOT, "default_filename": "index.html"})
     ])
 
-    # PRT Initialization
-    pyprt.initialize_prt()
     application.listen(PORT)
     print(f'Listening on Port={PORT}')
     Timer(1, open_browser).start()

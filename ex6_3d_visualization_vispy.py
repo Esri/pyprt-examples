@@ -82,12 +82,6 @@ class Canvas(scene.SceneCanvas):
 
 
 if __name__ == '__main__':
-    print('\nInitializing PRT.')
-    pyprt.initialize_prt()
-
-    if not pyprt.is_prt_initialized():
-        raise Exception('PRT is not initialized')
-
     initial_geometry = pyprt.InitialShape(
         np.array([0, 0, 0,  0, 0, 2,  1, 0, 1,  1, 0, 0], dtype='f'))
     initial_geometry2 = pyprt.InitialShape(
@@ -120,9 +114,6 @@ if __name__ == '__main__':
                 all_faces.append(model_faces)
         else:
             print('\nError while instanciating the model generator.')
-
-    print('\nShutdown PRT.')
-    pyprt.shutdown_prt()
 
     # Data
     mat = np.array(all_vertices).copy()
