@@ -1,0 +1,11 @@
+arcgis
+notebook
+numpy
+pandas
+PyPRT
+PyQt5
+pyvista[jupyter]
+scipy
+Shapely
+tornado
+vispy
