@@ -40,7 +40,7 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
    1. Update to latest `pip`:
       * Linux: `.venv/bin/python -m pip install --upgrade pip`
       * Windows: `.venv\Scripts\python -m pip install --upgrade pip`
-    1. Update to latest `wheel`:
+   1. Update to latest `wheel`:
       * Linux: `.venv/bin/python -m pip install --upgrade wheel`
       * Windows: `.venv\Scripts\python -m pip install --upgrade wheel`
    1. Install required packages for the example - this will fetch PyPRT from PyPI and all packages necessary to run the examples (replace `py39` with the used Python version):
