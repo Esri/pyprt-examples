@@ -1,4 +1,4 @@
-arcgis
+arcgis<2.4.0
 notebook
 numpy
 pandas
@@ -9,3 +9,5 @@ scipy
 Shapely
 tornado
 vispy
+dask[dataframe]
+ipywidgets<=7.6.5

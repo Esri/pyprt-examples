@@ -9,3 +9,5 @@ scipy
 Shapely
 tornado
 vispy
+dask[dataframe]
+ipywidgets<7.5
