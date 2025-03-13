@@ -40,7 +40,7 @@ import tempfile
 from pathlib import Path
 import numpy as np
 
-from arcgis.gis import GIS
+from arcgis.gis import GIS, ItemProperties, ItemTypeEnum
 from arcgis.geometry import Geometry
 
 import pyprt
@@ -53,6 +53,7 @@ SOURCE_FEATURE_LAYER_WKID = '3857'
 TARGET_SCENE_LAYER_ID = '0'
 TARGET_SCENE_LAYER_DEFAULT_NAME = 'PyPRT_Ex10_Scene_Layer'
 RULE_PACKAGE_ITEM_ID = '4ab3503cd32c46e3ab129aa976b4f373'
+PORTAL_DATA_DIR = 'PyPRT Example 10'
 
 POPULATION_DENSITY_MODE = 'linear'  # or 'logarithmic'
 
@@ -70,6 +71,11 @@ def main():
         TARGET_SCENE_LAYER_DEFAULT_NAME)
     print(f'   ... done: {target_scene_layer_name}')
 
+    item_folder = gis.content.folders.get(folder=PORTAL_DATA_DIR)
+    if item_folder is None:
+        print(f"Creating portal folder '{PORTAL_DATA_DIR}' for scene layer item...")
+        item_folder = gis.content.folders.create(PORTAL_DATA_DIR)
+
     with tempfile.TemporaryDirectory() as temp_dir:
         slpk_name = make_name_unique(target_scene_layer_name)
 
@@ -78,7 +84,8 @@ def main():
         print(f"   ... done: {scene_layer_package}")
 
         print(f"Uploading new SLPK ...")
-        new_slpk_item = gis.content.add(data=scene_layer_package, item_properties={'title': slpk_name})
+        item_properties = ItemProperties(title=slpk_name, item_type=ItemTypeEnum.SCENE_PACKAGE.value)
+        new_slpk_item = item_folder.add(file=scene_layer_package, item_properties=item_properties).result()
         print(f"   ... done. Uploaded new SLPK item '{new_slpk_item.title}' with id '{new_slpk_item.id}'")
 
     print("Publish new scene layer from new SLPK...")
