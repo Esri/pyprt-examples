@@ -51,7 +51,7 @@ def main():
     conda_cmd_default = "%LOCALAPPDATA%\\miniconda3\\condabin\\conda" if platform.system() == "Windows" else "/opt/miniconda3/bin"
 
     parser = argparse.ArgumentParser(description='PyPRT conda env tests for examples')
-    parser.add_argument("--py_ver", help="Python version to build for (38, ...)", type=str, required=True)
+    parser.add_argument("--py_ver", help="Python version to build for (39, ...)", type=str, required=True)
     parser.add_argument(
         '--pyprt_conda_package', help='custom pyprt build to use in conda env test', type=str, required=False)
     parser.add_argument('--conda_env_name', help='name of conda env', type=str, required=False)

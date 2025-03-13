@@ -26,14 +26,6 @@ def asset_file(filename):
     return os.path.join(CS_FOLDER, 'data', filename)
 
 
-# PRT Initialization
-print('\nInitializing PRT.')
-pyprt.initialize_prt()
-
-if not pyprt.is_prt_initialized():
-    raise Exception('PRT is not initialized')
-
-
 # Data
 rpk = asset_file('candler.rpk')
 attrs = {}
@@ -55,8 +47,3 @@ os.makedirs(encoder_options['outputPath'], exist_ok=True)
 models = m.generate_model(
     [attrs], rpk, 'com.esri.prt.codecs.OBJEncoder', encoder_options)
 print('\nGenerated models located in '+encoder_options['outputPath'])
-
-
-# PRT End
-pyprt.shutdown_prt()
-print('\nShutdown PRT.')

@@ -26,14 +26,6 @@ def asset_file(filename):
     return os.path.join(CS_FOLDER, 'data', filename)
 
 
-# PRT Initialization
-print('\nInitializing PRT.')
-pyprt.initialize_prt()
-
-if not pyprt.is_prt_initialized():
-    raise Exception('PRT is not initialized')
-
-
 # Data
 rpk = asset_file('extrusion_rule.rpk')
 attrs1 = {}
@@ -60,8 +52,3 @@ print('\nSecond generation:\n')
 # in this case, equivalent to m.generate_model([attrs3, attrs3]).
 models2 = m.generate_model([attrs3], rpk, 'com.esri.pyprt.PyEncoder', {})
 visualize_prt_results(models2)
-
-
-# PRT End
-pyprt.shutdown_prt()
-print('\nShutdown PRT.')
