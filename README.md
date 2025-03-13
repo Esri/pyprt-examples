@@ -113,7 +113,7 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
   <tr>
     <td>8</td>
     <td>This example demonstrates how PyPRT can be used with the <a href="https://developers.arcgis.com/python/">ArcGIS API for Python</a> in order to collect data from <a href="https://www.esri.com/en-us/arcgis/products/arcgis-online/overview">ArcGIS Online</a>, generate 3D content and publish the content back to ArcGIS Online.</td>
-    <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://developers.arcgis.com/">ArcGIS Developer account</a>. Also, the published item needs to be manually deleted from the ArcGIS Online account before the example script can be run again (we do not want to delete things from your account).</td>
+    <td><b>Example is not yet compatible with Python 3.12.</b> Please note that in order to publish and visualize the generated models, the user needs an <a href="https://developers.arcgis.com/">ArcGIS Developer account</a>. Also, the published item needs to be manually deleted from the ArcGIS Online account before the example script can be run again (we do not want to delete things from your account).</td>
   </tr>
   <tr>
     <td>9</td>
@@ -128,7 +128,7 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
   <tr>
     <td>10</td>
     <td>This example demonstrates how an existing Scene Layer can be updated without having to touch any related Web Scenes. We use PyPRT to create a Scene Layer with a 3d visualization of the Swiss population density. We then recreate the Scene Layer with different visualization properties and show how the Web Scene updates automatically.</td>
-    <td>You might want to use the keyring package to store your credentials for arcgis.com. The example script will automatically pick them up.<br/>To store the credentials execute the following once in a terminal:<pre>$ python
+    <td><b>Example is not yet compatible with Python 3.12.</b> You might want to use the keyring package to store your credentials for arcgis.com. The example script will automatically pick them up.<br/>To store the credentials execute the following once in a terminal:<pre>$ python
 >>> import keyring
 >>> keyring.set_password("arcgis.com",
       "your_user", "your_password")</pre></td>
