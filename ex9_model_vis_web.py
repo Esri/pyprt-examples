@@ -26,7 +26,8 @@ import tornado.web
 import webbrowser
 from threading import Timer
 import pyprt
-from arcgis.gis import GIS
+from arcgis.gis import GIS, ItemProperties, ItemTypeEnum
+from arcgis.gis._impl._content_manager import SharingLevel
 
 DBG = True
 CS_FOLDER = Path().absolute()
@@ -34,7 +35,7 @@ ROOT = os.path.join(CS_FOLDER, 'ex9_html')
 OUTPUT_PATH = os.path.join(CS_FOLDER, 'ex9_output')
 RPK = os.path.join(CS_FOLDER, 'data', 'translateModel.rpk')
 PORT = 9999
-AGO_DATA_DIR = 'modelVisServerData'
+AGO_DATA_DIR = 'PyPRT Example 9'
 
 
 allowed = set(string.ascii_letters + string.digits + '-' + '_')
@@ -141,17 +142,14 @@ class MainHandler(tornado.web.RequestHandler):
             OUTPUT_PATH, self.basename + '.slpk')
 
     def publish(self):
-        slpk_item = self.gis.content.add(
-            {
-                "title": f"PyPRT_webApp_{self.basename}",
-                "tags": "slpk",
-            },
-            data=self.filename_slpk,
-            folder=AGO_DATA_DIR
-        )
+
+        item_folder = gis.content.folders.get(folder=AGO_DATA_DIR)
+        item_properties = ItemProperties(title=f"PyPRT_webApp_{self.basename}", item_type=ItemTypeEnum.SCENE_PACKAGE.value, tags="slpk")
+        slpk_item = item_folder.add(file=self.filename_slpk, item_properties=item_properties).result()
 
         slpk_item_published = slpk_item.publish()
-        slpk_item_published.share(everyone=True)
+        sharing_mgr = slpk_item_published.sharing
+        sharing_mgr.sharing_level = SharingLevel.EVERYONE
         slpk_item.delete()
 
         return slpk_item_published.id
@@ -190,15 +188,18 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='ArcGIS Online credentials')
     parser.add_argument(
         '--username', help='Your username for AGO', type=str, required=True)
-
+    parser.add_argument(
+        '--password', help='Your password for AGO', type=str, required=False)
     args = parser.parse_args()
-    user_pwd = getpass.getpass(prompt='Enter your AGOL password: ')
+    if args.password is None:
+        args.password = getpass.getpass(prompt='Enter your AGOL password: ')
 
     gis = GIS(url='https://www.arcgis.com',
-              username=args.username, password=user_pwd)
+              username=args.username, password=args.password)
 
     # Create folder for scene layers
-    gis.content.create_folder(AGO_DATA_DIR)
+    if gis.content.folders.get(folder=AGO_DATA_DIR) is None:
+        gis.content.folders.create(AGO_DATA_DIR)
 
     application = tornado.web.Application([
         (r"/file-upload", MainHandler, dict(gis=gis)),
