@@ -4,14 +4,13 @@ channels:
 dependencies:
   - python=3.11
   - esri::pyprt
-  - esri::arcgis
+  - esri::arcgis<2.4.0
   - numpy
   - pandas
   - pyqt
   - scipy
   - shapely
   - notebook<7.0
-  - ipywidgets
   - conda-forge::vtk>=9.2
   - conda-forge::pyvista
   - conda-forge::trame

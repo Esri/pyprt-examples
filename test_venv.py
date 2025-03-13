@@ -27,7 +27,7 @@ def get_python_cmd(venv_dir):
     return py_cmd
 
 
-def setup_venv_from_requirements(venv_dir, env_py):
+def setup_venv_from_requirements(venv_dir, env_py, pyprt_wheel):
     venv.create(venv_dir, with_pip=True)
 
     py_cmd = get_python_cmd(venv_dir)
@@ -35,7 +35,21 @@ def setup_venv_from_requirements(venv_dir, env_py):
     os.system(f"{py_cmd} -m pip install --upgrade wheel")
 
     env_os = "windows" if platform.system() == "Windows" else "linux"
-    os.system(f"{py_cmd} -m pip install -r envs/{env_os}/requirements-{env_py}.txt")
+    req_file = f'envs/{env_os}/requirements-{env_py}.txt'
+
+    # remove existing PyPRT entry in case of custom PyPRT wheel
+    if pyprt_wheel:
+        with open(req_file, "r") as f:
+            lines = f.readlines()
+        with tempfile.NamedTemporaryFile(prefix=f"reqs-filtered-{env_py}-", suffix=".txt", mode="w+", delete=False) as f:
+            for line in lines:
+                if 'PyPRT' not in line:
+                    f.write(line)
+            req_file = f.name
+
+    os.system(f"{py_cmd} -m pip install -r {req_file}")
+    if pyprt_wheel:
+        add_custom_pyprt_wheel(venv_dir, pyprt_wheel)
 
 
 def add_custom_pyprt_wheel(venv_dir, pyprt_wheel_path):
@@ -45,11 +59,17 @@ def add_custom_pyprt_wheel(venv_dir, pyprt_wheel_path):
 
 def run_examples(venv_dir):
     py_cmd = get_python_cmd(venv_dir)
+    print(">>> CHECK VERSION:")
     os.system(f'{py_cmd} -c "import pyprt; print(pyprt.get_api_version())"')
+    print(">>> EXAMPLE 1:")
     os.system(f"{py_cmd} ex1_python_encoder.py")
+    print(">>> EXAMPLE 2:")
     os.system(f"{py_cmd} ex2_obj_initial_shape.py")
+    print(">>> EXAMPLE 3:")
     os.system(f"{py_cmd} ex3_format_exporter.py")
+    print(">>> EXAMPLE 4:")
     os.system(f"{py_cmd} ex4_multi_generations.py")
+    print(">>> DONE.")
 
 
 def main():
@@ -66,12 +86,10 @@ def main():
     if args.venv_path:
         venv_dir = args.venv_path
     else:
-        venv_temp_dir = tempfile.TemporaryDirectory(prefix=f'pyprt-venv-test-py{env_py}')
+        venv_temp_dir = tempfile.TemporaryDirectory(prefix=f'pyprt-venv-test-py{env_py}-')
         venv_dir = venv_temp_dir.name
 
-    setup_venv_from_requirements(venv_dir, env_py)
-    if args.pyprt_wheel:
-        add_custom_pyprt_wheel(venv_dir, args.pyprt_wheel)
+    setup_venv_from_requirements(venv_dir, env_py, args.pyprt_wheel)
     run_examples(venv_dir)
 
 
