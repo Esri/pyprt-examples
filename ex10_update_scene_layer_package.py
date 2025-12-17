@@ -1,4 +1,4 @@
-# Copyright (c) 2012-2024 Esri R&D Center Zurich
+# Copyright (c) 2012-2026 Esri R&D Center Zurich
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -48,11 +48,11 @@ from pyprt.pyprt_arcgis import arcgis_to_pyprt
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 
-SOURCE_FEATURE_LAYER_ID = 'dfae9883bc3548dcbd29758ff8ea9234'  # Switzerland Kantone Boundaries 2021
-SOURCE_FEATURE_LAYER_WKID = '3857'
+SOURCE_FEATURE_LAYER_ID = 'aab6cb33e96c4dd8896eeee3e7473b96'  # 2025 Boundaries Switzerland and Liechtenstein detailed
+TARGET_WKID = '3857'
 TARGET_SCENE_LAYER_ID = '0'
 TARGET_SCENE_LAYER_DEFAULT_NAME = 'PyPRT_Ex10_Scene_Layer'
-RULE_PACKAGE_ITEM_ID = '4ab3503cd32c46e3ab129aa976b4f373'
+RULE_PACKAGE_ITEM_ID = 'c1f4154171bd4e0bbe41c9a33388c2ee'
 PORTAL_DATA_DIR = 'PyPRT Example 10'
 
 POPULATION_DENSITY_MODE = 'linear'  # or 'logarithmic'
@@ -111,10 +111,10 @@ def main():
 
 def fetch_source_features(gis, source_item_id):
     source_feature_layer_collection = gis.content.get(source_item_id)
-    assert len(source_feature_layer_collection.layers) == 9
-    source_feature_layer = source_feature_layer_collection.layers[2]
-    assert source_feature_layer.properties.name == 'CHE_Kantone'
-    source_features = source_feature_layer.query(return_z=True)
+    assert len(source_feature_layer_collection.layers) == 8
+    source_feature_layer = source_feature_layer_collection.layers[3]
+    assert source_feature_layer.properties.name == 'Cantons large scale 2025'
+    source_features = source_feature_layer.query(return_z=True, out_sr=TARGET_WKID)
     return source_features
 
 
@@ -128,14 +128,14 @@ def generate_scene_layer_package(gis, name, source_features, output_dir):
     for source_feature in source_features:
         attrs.append({
             'populationDensityMode': POPULATION_DENSITY_MODE,
-            'population': float(source_feature.get_value('TOTPOP_CY')),
-            'area': float(source_feature.get_value('AREA'))
+            'population': float(source_feature.get_value('EINWOHNERZAHL')),
+            'area': float(source_feature.get_value('KANTONSFLAECHE')) * 0.01 # convert ha to km2
         })
 
     pyprt_slpk_options = {
         'sceneType': 'Local',  # cannot use Global as PyPRT does not have reprojection capabilities
         'baseName': name,
-        'sceneWkid': SOURCE_FEATURE_LAYER_WKID,
+        'sceneWkid': TARGET_WKID,
         'layerTextureEncoding': ['2'],
         'layerEnabled': [True],
         'layerUID': ['1'],
