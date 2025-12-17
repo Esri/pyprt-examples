@@ -1,0 +1,20 @@
+name: pyprt-examples-py313
+channels:
+  - defaults
+dependencies:
+  - python=3.13
+  - esri::pyprt
+  - esri::arcgis
+  - numpy
+  - pandas
+  - pyqt
+  - scipy
+  - shapely
+  - notebook<7.0
+  - conda-forge::vtk>=9.2
+  - conda-forge::pyvista
+  - conda-forge::trame
+  - conda-forge::trame-vtk
+  - conda-forge::trame-vuetify
+  - conda-forge::vispy
+  - conda-forge::ipyvtklink
