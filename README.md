@@ -24,10 +24,12 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 
 ## Requirements
 
-* Windows 10/11 64bit or Linux 64bit (RHEL 8/9 and compatible distributions)
-* Python 3.10 64bit or later. Please note, we currently provide PyPRT builds for Python 3.10, 3.11, 3.12 and 3.13. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
-  * Please note: the examples using `arcgis` are only supported for Python 3.11+.
+* Windows 10/11 64bit or Linux 64bit (RHEL 8/9 and compatible distributions).
+* Python 3.10 64bit or later.
+* We provide PyPRT packages ([PyPI](https://pypi.org/project/pyprt/), [Conda](https://anaconda.org/channels/Esri/packages/pyprt/overview)) for Python 3.10, 3.11, 3.12 and 3.13. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
 * Required Python packages: see `envs` directory
+
+_Note: Examples requring the `arcgis` (and `arcgis-mapping`) package are only supported for Python 3.11 and later._
 
 ## Running the examples
 
@@ -37,7 +39,7 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
 
 1. Open a shell and change to the root of this example repository.
 1. First time setup:
-   1. Create a virtualenv: `python3.10 -m venv .venv` (replace `python3.13` with path to desired Python version if necessary)
+   1. Create a virtualenv: `python3.13 -m venv .venv` (replace `python3.13` with path to desired Python version if necessary)
    1. Update to latest `pip`:
       * Linux: `.venv/bin/python -m pip install --upgrade pip`
       * Windows: `.venv\Scripts\python -m pip install --upgrade pip`
@@ -114,7 +116,7 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
   <tr>
     <td>8</td>
     <td>This example demonstrates how PyPRT can be used with the <a href="https://developers.arcgis.com/python/">ArcGIS API for Python</a> in order to collect data from <a href="https://www.esri.com/en-us/arcgis/products/arcgis-online/overview">ArcGIS Online</a>, generate 3D content and publish the content back to ArcGIS Online.</td>
-    <td><b>Example is not yet compatible with Python 3.12.</b> Please note that in order to publish and visualize the generated models, the user needs an <a href="https://developers.arcgis.com/">ArcGIS Developer account</a>. Also, the published item needs to be manually deleted from the ArcGIS Online account before the example script can be run again (we do not want to delete things from your account).</td>
+    <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://developers.arcgis.com/">ArcGIS Developer account</a>. Also, the published item needs to be manually deleted from the ArcGIS Online account before the example script can be run again (we do not want to delete things from your account).</td>
   </tr>
   <tr>
     <td>9</td>
