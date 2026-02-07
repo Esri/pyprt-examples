@@ -24,9 +24,12 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 
 ## Requirements
 
-* Windows 10/11 64bit or Linux 64bit (RHEL 8/9 and compatible distributions)
-* Python 3.9 64bit or later. Please note, we currently provide PyPRT builds for Python 3.9, 3.10, 3.11 and 3.12. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
+* Windows 10/11 64bit or Linux 64bit (RHEL 8/9 and compatible distributions).
+* Python 3.10 64bit or later.
+* We provide PyPRT packages ([PyPI](https://pypi.org/project/pyprt/), [Conda](https://anaconda.org/channels/Esri/packages/pyprt/overview)) for Python 3.10, 3.11, 3.12 and 3.13. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
 * Required Python packages: see `envs` directory
+
+_Note: Examples requiring the `arcgis` (and `arcgis-mapping`) package are only supported for Python 3.11 and later._
 
 ## Running the examples
 
@@ -36,16 +39,16 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
 
 1. Open a shell and change to the root of this example repository.
 1. First time setup:
-   1. Create a virtualenv: `python3.9 -m venv .venv` (replace `python3.9` with path to desired Python version if necessary)
+   1. Create a virtualenv: `python3.13 -m venv .venv` (replace `python3.13` with path to desired Python version if necessary)
    1. Update to latest `pip`:
       * Linux: `.venv/bin/python -m pip install --upgrade pip`
       * Windows: `.venv\Scripts\python -m pip install --upgrade pip`
    1. Update to latest `wheel`:
       * Linux: `.venv/bin/python -m pip install --upgrade wheel`
       * Windows: `.venv\Scripts\python -m pip install --upgrade wheel`
-   1. Install required packages for the example - this will fetch PyPRT from PyPI and all packages necessary to run the examples (replace `py39` with the used Python version):
-      * Linux: `.venv/bin/python -m pip install -r envs/linux/requirements-py39.txt`
-      * Windows: `.venv\Scripts\python -m pip install -r envs\windows\requirements-py39.txt`
+   1. Install required packages for the example - this will fetch PyPRT from PyPI and all packages necessary to run the examples (replace `py313` with the used Python version):
+      * Linux: `.venv/bin/python -m pip install -r envs/linux/requirements-py313.txt`
+      * Windows: `.venv\Scripts\python -m pip install -r envs\windows\requirements-py313.txt`
 1. Activate the environment:
    * Linux: `source .venv/bin/activate`
    * Windows: `.venv\Scripts\activate.bat`
@@ -55,8 +58,8 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
 ### Alternative: using Anaconda
 
 1. Open the Anaconda prompt and change to the directory where you checked out this repository.
-1. Ensure you have a working Anaconda Python 64bit installation, e.g. for Python 3.9.
-1. Run `conda env create --prefix env --file envs/environment-py39.yml` to install PyPRT and all dependencies for the examples (replace `py39` with the used Python version).
+1. Ensure you have a working Anaconda Python 64bit installation, e.g. for Python 3.10.
+1. Run `conda env create --prefix env --file envs/environment-py313.yml` to install PyPRT and all dependencies for the examples (replace `py313` with the used Python version).
    * In case `conda env create` takes very long or runs into errors, try to remove `arcgis` from `environment-pyXX.yml` and manually call `conda install --prefix env -c esri arcgis`. 
 1. Activate the Anaconda environment: `conda activate ./env`
 1. Now run e.g. `python ex1_python_encoder.py` to execute the corresponding Python script. For the examples based on Jupyter Notebooks, first run `jupyter notebook` and open the desired example notebook in the opening browser page.
@@ -113,7 +116,7 @@ PyPRT can be installed with `pip install pyprt` or `conda install -c esri pyprt`
   <tr>
     <td>8</td>
     <td>This example demonstrates how PyPRT can be used with the <a href="https://developers.arcgis.com/python/">ArcGIS API for Python</a> in order to collect data from <a href="https://www.esri.com/en-us/arcgis/products/arcgis-online/overview">ArcGIS Online</a>, generate 3D content and publish the content back to ArcGIS Online.</td>
-    <td><b>Example is not yet compatible with Python 3.12.</b> Please note that in order to publish and visualize the generated models, the user needs an <a href="https://developers.arcgis.com/">ArcGIS Developer account</a>. Also, the published item needs to be manually deleted from the ArcGIS Online account before the example script can be run again (we do not want to delete things from your account).</td>
+    <td>Please note that in order to publish and visualize the generated models, the user needs an <a href="https://developers.arcgis.com/">ArcGIS Developer account</a>. Also, the published item needs to be manually deleted from the ArcGIS Online account before the example script can be run again (we do not want to delete things from your account).</td>
   </tr>
   <tr>
     <td>9</td>

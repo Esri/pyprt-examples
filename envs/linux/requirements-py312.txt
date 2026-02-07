@@ -1,4 +1,5 @@
 arcgis
+arcgis-mapping
 notebook
 numpy
 pandas
