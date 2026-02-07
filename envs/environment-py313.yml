@@ -4,6 +4,7 @@ channels:
 dependencies:
   - python=3.13
   - esri::arcgis
+  - esri::pyprt
   - numpy
   - pandas
   - pyqt
