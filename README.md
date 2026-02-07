@@ -29,7 +29,7 @@ This repo contains examples of PyPRT usage. You can find installation instructio
 * We provide PyPRT packages ([PyPI](https://pypi.org/project/pyprt/), [Conda](https://anaconda.org/channels/Esri/packages/pyprt/overview)) for Python 3.10, 3.11, 3.12 and 3.13. For other Python versions, please [build](https://github.com/Esri/pyprt) PyPRT yourself.
 * Required Python packages: see `envs` directory
 
-_Note: Examples requring the `arcgis` (and `arcgis-mapping`) package are only supported for Python 3.11 and later._
+_Note: Examples requiring the `arcgis` (and `arcgis-mapping`) package are only supported for Python 3.11 and later._
 
 ## Running the examples
 
