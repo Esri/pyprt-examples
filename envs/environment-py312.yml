@@ -10,8 +10,8 @@ dependencies:
   - pyqt
   - scipy
   - shapely
-  - notebook<7.0
-  - conda-forge::vtk>=9.2
+  - notebook
+  - conda-forge::vtk
   - conda-forge::pyvista
   - conda-forge::trame
   - conda-forge::trame-vtk

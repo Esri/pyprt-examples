@@ -1,4 +1,5 @@
-arcgis<2.4.0
+arcgis
+arcgis-mapping
 notebook
 numpy
 pandas
@@ -10,4 +11,3 @@ Shapely
 tornado
 vispy
 dask[dataframe]
-ipywidgets<=7.6.5
